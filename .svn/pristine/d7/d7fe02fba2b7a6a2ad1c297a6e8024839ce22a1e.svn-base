@@ -1,0 +1,46 @@
+/**
+ * 
+ */
+function edit(userid){
+	 BootstrapDialog.show({
+	 	title:"Edit",
+    	message: $('<div></div>').load('userController/queryById/'+userid)
+	 });
+}
+
+function deleteUser(userid){
+	BootstrapDialog.show({
+	 	title:"Delete",
+    	message: "Are you sure to delete this account?",
+    	buttons: [{
+            label: 'Yes',
+            hotkey: 65, 
+            action: function() {
+               window.location.href="userController/delete/"+userid;
+            }
+        }, {
+            label: 'No',
+            hotkey: 66,
+            action: function(dialogItself) {
+                dialogItself.close();
+            }
+        }]
+	 });
+}
+
+function checkUser(){
+    var input=$("#input").val();
+    $.ajax({
+       url:"userController/queryByName",
+       type:"post",
+       data:{"input":input},
+       dataType:"json",
+      success:function(data){
+           if (data!=null ) {
+            alert(data);
+	        }else if(data==null && username !=''){
+	            
+	        }
+      	}
+    });
+}

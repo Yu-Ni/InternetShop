@@ -1,0 +1,29 @@
+package com.cqut.model.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.AdminDao;
+import com.cqut.model.dao.BuyerDao;
+import com.cqut.model.dao.SellerDao;
+import com.cqut.model.pojo.Admin;
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Seller;
+import com.cqut.model.service.SellManagerService;
+
+@Service
+public class SellManagerServiceImpl implements SellManagerService {
+	@Autowired
+	private SellerDao dao;
+
+	@Override
+	public List<Seller> queryByRealName(String input) {
+		// TODO Auto-generated method stub
+		return dao.queryByRealName(input);
+	}
+	
+	
+
+}

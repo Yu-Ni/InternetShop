@@ -1,0 +1,14 @@
+*{
+	margin:0px;
+	padding:0px;
+}
+
+.nav_title{
+	height: 30px;
+	background: #FFE4C4;
+}
+.left_info ul li{ 
+	 float:left;
+	 list-style:none; /* 将默认的列表符号去掉 */
+     margin:5px;
+}

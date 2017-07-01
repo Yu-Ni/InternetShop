@@ -1,0 +1,40 @@
+package com.cqut.controller;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.service.BuyerService;
+
+import net.sf.json.JSONArray;
+
+@Controller
+@RequestMapping("/buyerController")
+public class BuyerController {
+	
+	@Autowired
+	private BuyerService service;
+	
+	@RequestMapping("/selectByTypeName")
+	@ResponseBody
+	public String selectByTypeName(String typename){
+		System.out.println(typename);
+		List<Commodity> list=service.selectByTypeName(typename);
+		//List<Commodity> list=new ArrayList<Commodity>();
+		//list.add(commodity);
+		return JSONArray.fromObject(list).toString();
+	}
+	
+}

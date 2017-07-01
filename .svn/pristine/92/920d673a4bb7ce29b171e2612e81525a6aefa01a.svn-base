@@ -1,0 +1,12 @@
+package com.cqut.model.service;
+
+import com.cqut.model.pojo.Admin;
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Seller;
+
+
+public interface LoginService {
+	public Seller loginSeller(String username,String password);
+	public Buyer loginBuyer(String username,String password);
+	public Admin loginAdmin(String username,String password);
+}

@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+.input-group{
+	margin: 10px 20% !important;
+	width:340px !important;
+}
+
+.registerBtn{
+	width:168px;
+	height:40px;
+	margin-left:2px;
+	background-color:#337AB7;
+	color:#ffffff;
+	-webkit-border-top-left-radius:0.3em;
+    -webkit-border-top-right-radius:0.3em;
+    -webkit-border-bottom-left-radius:0.3em;
+    -webkit-border-bottom-right-radius:0.3em;
+}
+
+.modal-content{
+    text-align: center !important;
+}
+
+@media (min-width: 768px){
+	.modal-dialog {
+	    margin: 10% 57% !important;
+	}
+}

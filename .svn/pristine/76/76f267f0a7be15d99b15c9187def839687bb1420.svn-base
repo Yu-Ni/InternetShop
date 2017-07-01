@@ -1,0 +1,147 @@
+$(function() {
+	getCommByType();
+	getFoodShow();
+	getShoeShow();
+	getFurnitureShow();
+	IntiNotice();
+});
+function getCommByType() {
+	$.ajax({
+		data : {
+			typename : '女装男装'
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			var obj = msg;
+			Show("clothesShow", obj);
+		}
+	});
+}
+function getShoeShow() {
+	$.ajax({
+		data : {
+			typename : '鞋类箱包'
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			var obj = msg;
+			Show("shoeShow", obj);
+		}
+	});
+}
+function getFoodShow() {
+	$.ajax({
+		data : {
+			typename : '汇吃美食'
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			var obj = msg;
+			Show("foodShowDiv", obj);
+
+		}
+	});
+}
+function getFurnitureShow() {
+	$.ajax({
+		data : {
+			typename : '家居家纺'
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			var obj = msg;
+			Show("furnitureShowDiv", obj);
+
+		}
+	});
+}
+
+function Show(divId, obj) {
+	for (var i = 0; i < obj.length; i++) {
+		var div1 = document.getElementById(divId);
+		var everyShow = document.createElement("div");
+		everyShow.style.float = "left";
+		everyShow.style.marginLeft = '40px';
+		everyShow.style.marginTop = '30px';
+		everyShow.style.border='1px solid rgb(237,237,237)';
+		
+		var imgContent = document.createElement("img");
+		var spanPrice = document.createElement("div");
+		pricecontent = "<div class='a' style='width:200;height:80;'>price:" + "￥" + obj[i].price+"<br/>"+ '<a href="./module/jsp/buyer/Detailproduct.html?productId='+obj[i].productId+'">'+obj[i].productName +'</a>' +  "</div>";
+		spanPrice.innerHTML = pricecontent;
+		imgContent.src = obj[i].img;
+		imgContent.height = 260;
+		imgContent.width = 200;
+		everyShow.appendChild(imgContent);
+		everyShow.appendChild(spanPrice);
+		div1.appendChild(everyShow);
+		everyShow.onmousemove=function(){
+			everyShow.style.border='1px solid rgb(254,112,62)';
+		}
+		everyShow.onmouseout=function(){
+			everyShow.style.border='1px solid rgb(237,237,237)';
+		}
+	}
+}
+function JtshoppingC(){
+	alert("宝宝在购物车等你啦啦啦");
+}
+function IntiNotice(){
+	$('#tbNotice').bootstrapTable({
+		striped: true,// 隔行变色效果
+		pagination: true,//在表格底部显示分页条
+		pageSize: 10,//页面数据条数
+		pageNumber:1,//首页页码
+		pageList: [10, 15, 20, 30,50,100],//设置可供选择的页面数据条数
+		clickToSelect:true,//设置true 将在点击行时，自动选择rediobox 和 checkbox
+		cache: false,//禁用 AJAX 数据缓存
+		sortName:'noticetime',//定义排序列
+		sortOrder:'asc',//定义排序方式		
+		sidePagination:'client',//设置在哪里进行分页
+		contentType:'application/json',//发送到服务器的数据编码类型SS
+		dataType:'json',//服务器返回的数据类型
+    	//queryParams:'',//请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数
+    	url:'buyerController/selectNotice.do',//服务器数据的加载地址8
+		selectItemName:'',//radio or checkbox 的字段名
+		singleSelect : true,
+		columns:[{
+			field:'title',//返回值名称
+			title:'公告',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+		},{
+			field:'noticetime',//返回值名称
+			title:'发布时间',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+		}],
+		onDblClickRow: function (item, $element) {
+			$("#title").val(item.title);
+			$("#username").val(item.username);
+			$("#reply").val(item.reply);
+        $('#NoticeShow').modal('show');
+     } 
+	});
+}
+function SearchCommodity(){
+	var SearchContent=$("#SearchWhat").val();
+	$.ajax({
+		data : {
+			typename :SearchContent
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			//跳到分类的页面
+		}
+	});
+}

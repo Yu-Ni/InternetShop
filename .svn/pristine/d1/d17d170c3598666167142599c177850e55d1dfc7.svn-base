@@ -1,0 +1,37 @@
+$(function(){
+	getCommByType();
+});
+function getCommByType(){
+	$.ajax({
+		data:{typename:'22'},
+		url:'buyerController/selectByTypeId.do',
+		type:'post',  
+		dataType:'json',
+		success:function(msg) { 
+			 
+			var obj=msg; 
+			console.log(obj);
+			//var img =msg[0].img;
+			
+			//alert(img);
+			var div1=document.getElementById("clothesShow");
+			var imgContent = document.createElement("img");
+			var divPrice=document.createElement("div");
+			imgContent.src = msg[0].img;
+			imgContent.height=280;
+			imgContent.width=180;
+			div1.appendChild(imgContent);
+			div1.appendChild(divPrice);
+	    	/* if(msg){
+		    		var artcontent= "";
+		    		var myobj=eval(msg);
+		    		alert(myobj);
+		    		artcontent =  "<div class='a'>"+ myobj[0].artContent + "</div>";
+		    		var content = document.getElementById("labProfile");
+			    	content.innerHTML = artcontent;
+			    	content.innerHTML = content.innerHTML.substr(0,200) + "......";
+		    		
+		    	}*/
+		 }
+	});	
+}

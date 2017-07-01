@@ -1,0 +1,123 @@
+@CHARSET "UTF-8";
+.modal {
+	  padding-right: 46% !important;
+}
+
+#login{
+	float:right !important;
+	margin-right: 3% !important;
+    margin-top: -4% !important;
+}
+
+body{
+ 	background:url("../../img/Login/background.jpg") no-repeat;
+ }
+
+#login .loginform input {
+  padding: 9px 6px 9px 40px;
+  height: auto;
+}
+
+#login .loginform label {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 16px;
+  font-family:Georgia, serif;
+  color: rgba(0,0,0,0.3);
+}
+
+#login .loginform .form-actions,
+#register .loginform .form-actions {
+  border-top: 1px solid #e4e4e4;
+  background-color: #f7f7f7;
+  padding: 15px 30px;
+  text-align: center;
+}
+
+#login .loginform .controls,
+#register .loginform .controls {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+#login .loginform .pad,
+#register .loginform .pad {
+  overflow: hidden;
+  padding: 30px;
+}
+
+
+#login .loginform,
+#register .loginform {
+  margin-top: 200px;
+  position: relative;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  position: relative;
+  max-width: 356px;
+  padding: 0;
+}
+
+#login #owl-login,
+#register #owl-login {
+  width: 211px;
+  height: 108px;
+  background-image: url("../../img/Login/owl-login.png");
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  margin-left: -111px;
+}
+
+#login #owl-login .hand,
+#register #owl-login .hand {
+  width: 34px;
+  height: 34px;
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+  background-color: #472d20;
+  -webkit-transform: scaleY(0.6);
+  -moz-transform: scaleY(0.6);
+  -o-transform: scaleY(0.6);
+  -ms-transform: scaleY(0.6);
+  transform: scaleY(0.6);
+  -webkit-transition: 0.3s ease-out;
+  -moz-transition: 0.3s ease-out;
+  -o-transition: 0.3s ease-out;
+  -ms-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+  position: absolute;
+  left: 14px;
+  bottom: -8px;
+}
+#login #owl-login .hand.hand-r,
+#register #owl-login .hand.hand-r {
+  left: 170px;
+}
+
+.btn.btn-primary{
+	padding-right: 20px !important;
+	border-right-width: 1px !important;
+	padding-left: 20px !important;
+	margin-left: -19%;
+	width: 166px;
+}
+
+.btn.btn-link.text-muted{
+	color:gray;
+}
+
+.btn.btn-link.text-muted:hover{
+	text-decoration:none;
+}
+
+.tip{
+	font-size:15px !important;
+}
+
+@media (min-width: 768px){
+	.modal-dialog {
+	    margin: 29% 57% !important;
+	}
+}

@@ -1,0 +1,237 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>管理员界面</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
+
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-table.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/admin/changeColor.css">
+<!-- <link rel="stylesheet" type="text/css"
+	href="./module/css/admin/buttons.css"> -->
+
+<script type="text/javascript" src="./module/js/frame/jquery.js"></script>
+<script type="text/javascript" src="./module/js/frame/jquery.min.js"></script>
+<script type="text/javascript" src="./module/js/frame/bootstrap.js"></script>
+<script type="text/javascript" src="./module/js/frame/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table.min.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table-zh-CN.min.js"></script>
+</head>
+<body>
+	<div>
+		<button type="button" class="btn" id="add" onclick="addModal()" >&nbsp;新增</button>
+		<button type="button" id="edit" onclick="editModal()" class="btn">&nbsp;修改</button>
+		<button id="del" onclick="delData()" type="button" class="btn">&nbsp;删除</button>
+		<button id="refresh" onclick="refresh()" type="button" class="btn">&nbsp;刷新</button>
+		<input type="text" class="txt" id="searchT">
+		<button id="search" type="button" class="btn">&nbsp;查询</button>
+	</div>
+	<!-- 新增弹框 -->
+	<div>
+  	<div id="addModal" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">新增</h4>
+	      </div>
+	      <div class="modal-body" >
+	      	<div class="row" >
+               <div class="col-xs-12 col-md-5"  style="display:none;">
+                   <h4>管理员ID：</h4>
+                   <input type="text" id="adminid" name="adminid" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+	      <div class="modal-body">
+	      	<div class="row">
+               <div class="col-xs-12 col-md-5">
+                   <h4>管理员用户名：</h4>
+                   <input type="text" id="username" name="username" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+                <div class="col-xs-12 col-md-5" >
+                   <h4>管理员密码：</h4>
+                   <input type="text" id="password" name="password" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+             </div>
+             <div class="row">
+               <div class="col-xs-12 col-md-5">
+                   <h4>管理员姓名：</h4>
+                   <input type="text" id="realname" name="realname" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+              <div class="col-xs-12 col-md-5">
+                   <h4>性别：</h4>
+                   <input type="text" id="sex" name="sex" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+             </div>
+             <div class="row"> 
+               <div class="col-xs-12 col-md-5">
+                   <h4>头像：</h4>
+                   <input type="file" id="avatar" name="avatar" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+               <div class="col-xs-12 col-md-5">
+                   <h4>联系方式：</h4>
+                   <input type="text" id="telphone" name="telphone" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal" style="color:rgb(41,96,146)">关闭</button>
+	        <button type="button" class="btn btn-primary" onclick="add()" style="width:200px">新增（提交审核）</button>
+	      </div>
+	    </div>
+	  </div>
+	  </div>
+	    </div>
+	  </div> 
+	</div>
+	</div>
+	
+	<!-- 查看弹框 -->
+  	<div id="showModal" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">查看</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="row">
+               <div class="col-xs-12 col-md-5">
+                   <h4>管理员用户名：</h4>
+                   <input type="text" id="showusername" name="username" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+               <div class="col-xs-12 col-md-5">
+                   <h4>管理员姓名：</h4>
+                   <input type="text" id="showrealname" name="realname" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+             </div>
+             <div class="row">
+               <div class="col-xs-12 col-md-5">
+                   <h4>密码：</h4>
+                   <input type="password" id="showpassword" name="password" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+               <div class="col-xs-12 col-md-5">
+                   <h4>联系方式：</h4>
+                   <input type="text" id="showtelphone" name="telphone" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+             </div>
+             <div class="row"> 
+               <div class="col-xs-12 col-md-5">
+                   <h4>头像：</h4>
+                   <input type="file" id="showavatar" name="avatar" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+                <div class="col-xs-12 col-md-5">
+                   <h4>性别：</h4>
+                   <input type="text" id="showresex" name="sex" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+             </div>
+             
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+	       <!--  <button type="button" class="btn btn-primary" onclick="edit()">修改</button> -->
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  	
+	<div>
+	<ul class="pagination">
+		<li><a href="#">&laquo;</a></li>
+		<li class="active"><a href="#">1</a></li>
+		<li class="disabled"><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+		<li><a href="#">&raquo;</a></li>
+	</ul>
+	<!-- 表格 -->
+	
+	</div>
+	 	<!-- 修改弹框 -->
+  	<div id="editModal" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        <span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">修改</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="row">
+               <div class="col-xs-12 col-md-5">
+                   <h4>管理员用户名：</h4>
+                   <input type="text" id="editusername" name="username" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+               <div class="col-xs-12 col-md-5">
+                 <h4>管理员姓名：</h4>
+                   <input type="text" id="editrealname" name="realname" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+             </div>
+             <div class="row">
+               <div class="col-xs-12 col-md-5">
+                  <h4>管理员密码：</h4>
+                   <input type="text" id="editpassword" name="password" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+               
+               <div class="col-xs-12 col-md-5">
+                     <h4>头像：</h4>
+                   <input type="file" id="editavatar" name="avatar" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+             </div>
+             <div class="row"> 
+               <div class="col-xs-12 col-md-5">
+                  <h4>联系方式：</h4>
+                   <input type="text" id="edittelphone" name="telphone" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+                <div class="col-xs-12 col-md-5">
+                    <h4>性别：</h4>
+                   <input type="text" id="editsex" name="sex" class="form-control" aria-describedby="basic-addon1"/>
+               </div>
+             </div>
+             
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal" style="color:rgb(41,96,146)">取消</button>
+	        <button type="button" class="btn btn-primary" onclick="edit()">修改</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  	
+	 <table id="table">
+  	</table>
+	<script type="text/javascript" src="./module/js/admin/adminManager.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+body
+{
+    margin: 0;
+    padding: 0;
+}
+
+.kkdeng{
+	padding-left:25px;
+	padding-top:5px;
+	font-size:10px;
+	color:#666;
+	position:absolute;
+}
+.mi-hea
+{
+	height:30px;
+	top:0px;
+	position:relative;
+	background-color:rgb(245,245,245);
+}
+.mt-header {
+    height: 40px;
+    background: #ff4401;
+    padding: 12px;
+    position: relative;
+    z-index: 5;
+    border-bottom: 1px #e7e7e7 solid;
+    
+}
+ .mt-tblogo {
+    width: 160px;
+    height: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: left center;
+    color:white;
+    font-size: 24px;
+    padding-left:50px; 
+}
+.mt-nav {
+    float: right;
+    width: 82.4%;
+}
+.search-combobox {
+    font-size: 12px;
+    position:relative;
+    height:30px;
+    top:-50px;
+   
+}
+.formserch
+{
+	width:300px;
+	position:relative;
+	height:30px;
+	background: #ff4401;
+	left:70%;
+	
+}
+.search-combobox-input {
+    top: 0;
+    background: #fff;
+}
+.input .button
+{
+	height:30px;
+}
+ol, ul {
+    list-style: none;
+}
+.mt-nav:after {
+    content: '\0020';
+    display: block;
+    clear: both;
+    height: 0;
+}
+ 
+.mt-nav li {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    z-index: 1;
+    height: 50px;
+    width:100px;
+    font: 400 16px/36px tahoma;
+    line-height: 26px\9;
+    color:white;
+   
+}
+.col-main li {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    z-index: 1;
+    height: 50px;
+    width:100px;
+    font: 400 16px/36px tahoma;
+    line-height: 26px\9;
+   font-style:normal;
+   
+}
+ button.btn-search {
+    text-indent: 0;
+    font-size: 12px;
+    color: #666;
+    background: #f5f5f5;
+    height: 28px;
+    width: 72px;
+    border-left: 1px solid #d9d9d9;
+}
+.col-main {
+    float: left;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 40px;
+    transition: all ease-in-out .15s;
+    background: #fff;
+}
+.maint
+{
+padding-left:15%;
+position:absolute;
+}
+.tableW
+{
+	position:absolute;
+	width:80%;
+	height:100%;
+	top:25%;
+	left:15%;
+	right:15%;
+}
+.tableW table{
+	position:position;
+	width:78%;
+	right:10%;
+  border:1px solid #000000;
+  cellpadding:0; 
+  cellspacing:1;
+
+}
+td{
+	align:left;
+	padding-left:10px;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}

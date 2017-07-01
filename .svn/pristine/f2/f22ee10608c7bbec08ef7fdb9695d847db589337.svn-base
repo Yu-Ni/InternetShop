@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.BuyerDao">
+
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Commodity" id="t_commodity">
+		<id property="productId" column="productId" />
+		<result property="shopId" column="shopId" />
+		<result property="productName" column="productName" />
+		<result property="productMargin" column="productMargin" />
+		<result property="price" column="price" />
+		<result property="img" column="img" />
+		<result property="typeId" column="typeId" />
+		<!-- 配置外键结果集 -->
+		<association property="typeId" javaType="com.cqut.model.pojo.Type"
+			column="typeId">
+			<id property="typeId" column="typeId" />
+			<result property="typename" column="typename" />
+			<result property="remark" column="remark" />
+		</association>
+	</resultMap>
+	<resultMap type="com.cqut.model.pojo.Buyer" id="t_buyer">
+		<id property="buyerid" column="buyerid" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="telphone" column="telphone" />
+		<result property="integral" column="integral" />
+		<result property="avatar" column="avatar" />
+		<result property="sex" column="sex" />
+	</resultMap>
+		<resultMap type="com.cqut.model.pojo.Notice" id="t_notice">
+		<id property="noticeid" column="noticeid" />
+		<result property="title" column="title" />
+		<result property="username" column="username" />
+		<result property="theme" column="theme" />
+		<result property="reply" column="reply" />
+		<result property="noticetime" column="noticetime" />
+	</resultMap>
+
+	<select id="selectByTypeName" resultMap="t_commodity"
+		parameterType="com.cqut.model.dao.BuyerDao">
+		SELECT productId,productName,img,price FROM t_commodity
+		LEFT JOIN t_type ON t_type.typeid=t_commodity.typeId
+		WHERE typename =
+		#{typename}
+	</select>
+	<!-- 根据id获取个人信息 -->
+	<select id="queryByUserName" resultMap="t_buyer" parameterType="String">
+		select * from t_buyer where username like #{input}
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.cqut.model.pojo.Buyer">
+		insert into
+		t_buyer(buyerid,username,password,telphone,avatar,sex)
+		values(#{buyerid},#{username},#{password},#{telphone},#{avatar},#{sex})
+	</insert>
+
+	<!-- 编辑 -->
+	<update id="update">
+		update t_buyer set
+		username=#{username},password=#{password},telphone=#{telphone},avatar=#{avatar},sex=#{sex}
+		where buyerid=#{buyerid}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="deleteBuyer" parameterType="String">
+		delete from t_buyer where
+		buyerid = #{buyers}
+	</delete>
+	<!-- 查询所有商品 -->
+	<select id="selectAll" resultMap="t_commodity" parameterType="com.cqut.model.dao.BuyerDao">
+		select productId,productName,img,price from t_commodity
+	</select>
+	<!-- 查询公告 -->
+	<select id="selectNotice" resultMap="t_notice" parameterType="com.cqut.model.dao.BuyerDao">
+		select * from t_notice
+	</select> 
+
+</mapper>

@@ -1,0 +1,269 @@
+package com.cqut.model.service.impl;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.CartManageDao;
+import com.cqut.model.dao.SearchDao;
+import com.cqut.model.pojo.Cart;
+import com.cqut.model.pojo.Order;
+import com.cqut.model.service.CartManageService;
+import com.cqut.util.UID;
+
+@Service
+public class CartManageServiceImpl implements CartManageService{
+	
+	@Autowired
+	SearchDao searchDao;
+	
+	@Autowired
+	CartManageDao cartManageDao;
+
+	@Override
+	public List<Map<String, Object>> getCartList(String username,String goodType,String searchContent) {
+		String[] properties = {"cartid,"
+				+ " t_cart.productid,"
+				+ " t_commodity.productname,"
+				+ " t_commodity.img,"
+				+ " t_commodity.price, "
+				+ "t_cart.number, "
+				+ "t_cart.time, "
+				+ "t_shop.shopid, "
+				+ "t_shop.shopname"
+		};
+		
+		String baseEntity = " t_cart ";
+		String joinEntity = " LEFT JOIN t_buyer ON t_buyer.buyerid = t_cart.buyerid "
+				+ "LEFT JOIN t_commodity ON t_commodity.productid = t_cart.productid "
+				+ "LEFT JOIN t_shop ON t_shop.shopid = t_commodity.shopid";
+		String condition = " t_buyer.username = '"+username+"' ";
+			
+		if(goodType.equals("0")){
+			condition+=" AND t_commodity.productname LIKE '%"+searchContent+"%'";
+		}else{
+			condition+=" AND t_shop.shopname LIKE '%"+searchContent+"%'";
+		}
+		condition +=" ORDER BY t_shop.shopid ";
+		List<Map<String,Object>> list = searchDao.searchForeign(
+				properties, baseEntity, joinEntity, 
+				null, 
+				null, 
+				condition);
+		
+		List<Map<String,Object>> shopList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> productList = new ArrayList<Map<String,Object>>();
+		Map<String,Object> shopMap = new HashMap<String,Object>();
+		Map<String,Object> productMap = null;
+		if(list.size()>0){
+			double purchase = 0;
+			int amountType = 0;
+			String shop_id = list.get(0).get("shopid").toString();
+			int index = 0;
+			for(Map<String,Object> map : list){
+				productMap = new HashMap<String,Object>();
+				String shopid = map.get("shopid").toString();
+				
+				if(!shopid.equals(shop_id)){
+					shopMap.put("purchase",purchase);
+					shopMap.put("amountType",amountType);
+					shopMap.put("purchase_amountType",purchase+"-"+amountType+"-"+shop_id);
+					shopMap.put("product",productList);
+					shopList.add(shopMap);
+					shopMap = new HashMap<String,Object>();
+					productList = new ArrayList<Map<String,Object>>();
+					shop_id = shopid;
+					purchase = 0;
+					amountType = 0;
+				}
+				
+				
+				double price = Double.parseDouble(map.get("price").toString());
+				int amount = Integer.parseInt(map.get("number").toString());
+				double sumPrice = price*amount;
+				productMap.put("cartid",map.get("cartid").toString());
+				productMap.put("productid",map.get("productid").toString());
+				productMap.put("productname",map.get("productname").toString());
+				productMap.put("img",map.get("img").toString());
+				productMap.put("price",price);
+				productMap.put("time",map.get("time").toString());
+				productMap.put("number",amount);
+				productMap.put("sumPrice",sumPrice);
+				productList.add(productMap);
+				purchase += sumPrice;
+				amountType += amount;
+				shopMap.put("shopid",map.get("shopid").toString());
+				shopMap.put("shopname",map.get("shopname").toString());
+				
+				if(index==list.size()-1){
+					shopMap.put("purchase",purchase);
+					shopMap.put("amountType",amountType);
+					shopMap.put("purchase_amountType",purchase+"-"+amountType+"-"+shop_id);
+					shopMap.put("product",productList);
+					shopList.add(shopMap);
+				}
+				
+				index++;
+			}
+		}
+		return shopList;
+	}
+
+	@Override
+	public int addOrderByCart(String cartid,String username) {
+		String[] properties = {"cartid,"
+				+ " t_cart.productid,"
+				+ " t_commodity.productname,"
+				+ " t_commodity.img,"
+				+ " t_commodity.price, "
+				+ "t_cart.number, "
+				+ "t_cart.time, "
+				+ "t_shop.shopid, "
+				+ "t_shop.shopname,"
+				+ "t_cart.buyerid"
+		};
+		
+		String baseEntity = " t_cart ";
+		String joinEntity = " LEFT JOIN t_buyer ON t_buyer.buyerid = t_cart.buyerid "
+				+ "LEFT JOIN t_commodity ON t_commodity.productid = t_cart.productid "
+				+ "LEFT JOIN t_shop ON t_shop.shopid = t_commodity.shopid";
+		String condition = " t_cart.cartid='"+cartid+"'  ORDER BY t_shop.shopid ";
+		List<Map<String,Object>> list = searchDao.searchForeign(
+				properties, baseEntity, joinEntity, 
+				null, 
+				null, 
+				condition);
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date createTime = null;
+		try {
+			createTime = df.parse(df.format(new Date()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		double price = Double.parseDouble(list.get(0).get("price").toString());
+		int amount = Integer.parseInt(list.get(0).get("number").toString());
+		String orderid = UID.createID();
+		String shopid = list.get(0).get("shopid").toString();
+		String buyerid = list.get(0).get("buyerid").toString();
+		double sumPrice = price*amount;
+		Order order = new Order(orderid,shopid,"",buyerid,createTime,sumPrice,"");
+		return cartManageDao.addOrderByCart(order);
+	}
+
+	@Override
+	public int deleteCart(String cartid) {
+		return cartManageDao.deleteCart(cartid);
+	}
+
+	@Override
+	public int addOrderByCartShop(String shopid, String username) {
+		String[] properties = {"cartid,"
+				+ " t_cart.productid,"
+				+ " t_commodity.productname,"
+				+ " t_commodity.img,"
+				+ " t_commodity.price, "
+				+ "t_cart.number, "
+				+ "t_cart.time, "
+				+ "t_shop.shopid, "
+				+ "t_shop.shopname,"
+				+ "t_cart.buyerid"
+		};
+		
+		String baseEntity = " t_cart ";
+		String joinEntity = " LEFT JOIN t_buyer ON t_buyer.buyerid = t_cart.buyerid "
+				+ "LEFT JOIN t_commodity ON t_commodity.productid = t_cart.productid "
+				+ "LEFT JOIN t_shop ON t_shop.shopid = t_commodity.shopid";
+		String condition = " t_buyer.username='"+username+"' and t_commodity.shopid='"+shopid+"' "
+				+ " ORDER BY t_shop.shopid ";
+		List<Map<String,Object>> list = searchDao.searchForeign(
+				properties, baseEntity, joinEntity, 
+				null, 
+				null, 
+				condition);
+		
+		int result=0;
+		for(int i=0;i<list.size();i++){
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date createTime = null;
+			try {
+				createTime = df.parse(df.format(new Date()));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			double price = Double.parseDouble(list.get(i).get("price").toString());
+			int amount = Integer.parseInt(list.get(i).get("number").toString());
+			String orderid = UID.createID();
+			String shop_id = list.get(i).get("shopid").toString();
+			String buyerid = list.get(i).get("buyerid").toString();
+			double sumPrice = price*amount;
+			Order order = new Order(orderid,shop_id,"",buyerid,createTime,sumPrice,"");
+			result+=cartManageDao.addOrderByCart(order);
+		}
+		
+		if(result==list.size()){
+			return 1;
+		}
+		return 0;
+	}
+
+	@Override 
+	public int deleteCartShop(String username,String shopid) {
+		String[] properties={
+			"t_cart.cartid"	
+		};
+		String baseEntity = "t_cart";
+		String joinEntity="LEFT JOIN t_commodity ON t_commodity.productid = t_cart.productid "
+				+ "LEFT JOIN t_buyer ON t_buyer.buyerid = t_cart.buyerid";
+		String condition=" t_buyer.username='"+username+"' AND t_commodity.shopid='"+shopid+"'";
+		List<Map<String,Object>> list = searchDao.searchForeign(
+				properties, baseEntity, joinEntity, 
+				null, 
+				null, 
+				condition);
+		int index=0;
+		for(int i=0;i<list.size();i++){
+			String cartid = list.get(i).get("cartid").toString();
+			index+=cartManageDao.deleteCart(cartid);
+		}
+		if(index==list.size()){
+			return 1;
+		}
+		return 0;
+	}
+
+	@Override
+	public int addCart(Cart cart) { 
+		
+		Calendar a=Calendar.getInstance();
+		 
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		 Date time=null;
+		try {
+		   time= sdf.parse(sdf.format(new Date()));
+
+		} catch (ParseException e) {
+
+		   e.printStackTrace();
+		} 
+		String id= UUID.randomUUID().toString().replaceAll("-", ""); 
+		String cartid = "C"+a.get(Calendar.YEAR)+"-"+id;
+		cart.setCartid(cartid);
+		cart.setTime(time); 
+		return cartManageDao.insert(cart);
+	}
+	
+	
+}

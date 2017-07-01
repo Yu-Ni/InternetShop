@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.ShopDao">
+		<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Shop" id="t_shop">
+		<id property="shopid" column="shopid" />
+		<result property="sellerId" column="sellerId" />
+		<result property="shopname" column="shopname" />
+		<result property="shopage" column="shopage" />
+	</resultMap>
+
+
+	
+	<!-- 查询 -->
+	<select id="getShopInfo" resultMap="t_shop" parameterType="com.cqut.model.dao.ShopDao">
+		SELECT * FROM t_shop		
+		WHERE sellerId=#{sellerId}
+	</select>
+	
+	<!-- 增加 -->
+
+	<insert id="insertInd" parameterType="com.cqut.model.dao.ShopDao">
+		insert into t_shop(shopid,sellerId,shopname,shopage) values(#{shopid},#{sellerId},#{shopname},#{shopage})
+	</insert>
+</mapper>

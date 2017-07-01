@@ -1,0 +1,39 @@
+/**
+ * 
+ */
+function addModal(){ 
+	$('#addModal').modal('show');
+}
+/* 新增方法 */
+function add(){ 
+	var name = $('#productname').val(); 
+	if (!name && typeof(name)!="undefined" && name=='') 
+	{ 
+		alert("商品名不能为空！"); 
+	}else {
+		var parame = {};
+		parame.productName = $('#productname').val();
+		parame.typeId = $('#typeid').val();
+		parame.price = $('#price').val();
+		parame.productMargin = $('#margin').val();
+		parame.img = $('#image').val();
+		parame.remark = $('#remark').val(); 
+		parame.description = $('#description').val(); 
+
+		$.ajax({
+		  url:'commodityManagerController/addCommodity.do',
+		  data:parame,
+		  success:function(o){
+			  if(o<=0){
+				  alert("新增失败");
+			  }else
+			  $('#addModal').modal('hide');
+			  refresh();
+		  }
+		});
+	}
+}
+function ShopInfoList(){
+	var ui = document.getElementById("StoreIndex");
+	ui.style.display="none";
+}

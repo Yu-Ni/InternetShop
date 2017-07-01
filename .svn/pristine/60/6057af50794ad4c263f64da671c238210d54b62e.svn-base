@@ -1,0 +1,78 @@
+package com.cqut.model.service.impl;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.AdminDao;
+import com.cqut.model.dao.BuyerDao;
+import com.cqut.model.dao.CommodityDao;
+import com.cqut.model.dao.SellerDao;
+import com.cqut.model.pojo.Admin;
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.pojo.Seller;
+import com.cqut.model.service.SellManagerService;
+
+@Service
+public class SellManagerServiceImpl implements SellManagerService {
+	@Autowired
+	SellerDao sellerDao; 
+
+//	@Override
+//	public List<Seller> getList(String input) {
+//		// TODO Auto-generated method stub
+//		return sellerDao.getList(input);
+//	}
+	
+	@Override
+	public void insert(Seller seller) {
+		 
+		Calendar a=Calendar.getInstance();
+		String id= UUID.randomUUID().toString().replaceAll("-", ""); 
+		String sellerId = "P"+a.get(Calendar.YEAR)+"-"+id;
+		seller.setSellerId(sellerId);
+		sellerDao.insert(seller);
+		
+	}
+
+	@Override
+	public void update(Seller seller) {
+		sellerDao.update(seller);
+		
+	}
+
+	@Override
+	public List<Seller> getSellerByCondition(String condition) {
+		// TODO Auto-generated method stub
+		return sellerDao.getSellerByCondition(condition);
+	}
+
+	@Override
+	public void delete(String sellerIds) {
+		String id= "";
+		String ids[] = sellerIds.split(",");
+		
+		for(int i=0;i<ids.length;i++){
+			id+="'"+ids[i]+"',";
+		}
+		id=id.substring(0, id.length()-1);
+		id="("+id+")";
+		sellerDao.delete(id);
+		
+		
+	}
+
+	@Override
+	public String getSellerList(String condition) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+}

@@ -1,0 +1,87 @@
+$(function() {
+	getCommByType();
+	getFoodShow();
+	getShoeShow();
+	getFurnitureShow();
+});
+function getCommByType() {
+	$.ajax({
+		data : {
+			typename : '女装男装'
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			var obj = msg;
+			Show("clothesShow", obj);
+		}
+	});
+}
+function getShoeShow() {
+	$.ajax({
+		data : {
+			typename : '鞋类箱包'
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			var obj = msg;
+			Show("shoeShow", obj);
+		}
+	});
+}
+function getFoodShow() {
+	$.ajax({
+		data : {
+			typename : '汇吃美食'
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			var obj = msg;
+			Show("foodShowDiv", obj);
+
+		}
+	});
+}
+function getFurnitureShow() {
+	$.ajax({
+		data : {
+			typename : '家居家纺'
+		},
+		url : 'buyerController/selectByTypeName.do',
+		type : 'post',
+		dataType : 'json',
+		success : function(msg) {
+			var obj = msg;
+			Show("furnitureShowDiv", obj);
+
+		}
+	});
+}
+
+function Show(divId, obj) {
+	for (var i = 0; i < obj.length; i++) {
+		var div1 = document.getElementById(divId);
+		var everyShow = document.createElement("div");
+		everyShow.style.float = "left";
+		everyShow.style.marginLeft = '40px';
+		everyShow.style.marginTop = '30px';
+		var imgContent = document.createElement("img");
+		var spanPrice = document.createElement("div");
+		pricecontent = "<div class='a'>price:" + "￥" + obj[i].price + "&nbsp&nbsp&nbsp&nbsp" + obj[i].productName + "</div>" + "<div><input class='buy' type='button' onclick=JtshoppingC() value='加入购物车'/>" + "<input class='shoppingCar' type='button' value='立即购买'/>" + "</div>";
+		spanPrice.innerHTML = pricecontent;
+		imgContent.src = obj[i].img;
+		imgContent.height = 260;
+		imgContent.width = 200;
+		everyShow.appendChild(imgContent);
+		everyShow.appendChild(spanPrice);
+		div1.appendChild(everyShow);
+	}
+}
+function JtshoppingC(){
+	alert("宝宝在购物车等你啦啦啦");
+}

@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+body{
+	margin:0;
+	padding:0;
+	background-color:#F5F5F5;
+}
+
+#headerDiv{
+	margin-top:1%;
+	margin-left:13.5%;
+	margin-right:8.5%;
+	height:11%;
+	display:flex;
+	align-items:Center;
+	font-size:13px;
+}
+
+
+.userInfo{
+	float:left;
+	width:10%;
+}
+
+.navInfo{
+	margin-left:44.5%;
+	width:60%;
+}
+
+.navInfo a{
+	display:block;
+	width:auto;
+	height:auto;
+	padding:4% 4%;
+	text-decoration:none;
+	float:left !important;
+	margin-right:7%;
+}
+
+.navInfo a:hover,
+.navInfo a:active{
+	background-color:white;
+	color:#FF4400;
+	
+}
+
+
+a:visited,a:link{
+	background-color:#F5F5F5;
+	color:black;
+}

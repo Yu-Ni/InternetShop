@@ -1,0 +1,30 @@
+package com.cqut.model.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.AdminDao;
+import com.cqut.model.dao.BuyerDao;
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.service.BuyerManagerService;
+@Service
+public class BuyerManageServiceImpl implements BuyerManagerService{
+	
+	@Autowired
+	private BuyerDao dao;
+	
+	@Override
+	public List<Buyer> queryByUserName(String input) {
+		// TODO Auto-generated method stub
+		return dao.queryByUserName(input);
+	}
+	
+	@Override
+	public Commodity selectByTypeId(String typename) {
+		return dao.selectByTypeId(typename);
+	}
+
+}

@@ -1,0 +1,65 @@
+package com.cqut.model.service.impl;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
+
+import oracle.sql.DATE;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.CommodityDao;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.service.CommodityService;
+
+
+@Service
+public class CommodityServiceImpl implements CommodityService {
+
+	@Autowired
+	CommodityDao commodityDao; 
+	
+	@Override
+	public void insert(Commodity commodity) {
+		 
+		Calendar a=Calendar.getInstance();
+		String id= UUID.randomUUID().toString().replaceAll("-", ""); 
+		String productId = "P"+a.get(Calendar.YEAR)+"-"+id;
+		commodity.setProductId(productId); 
+		commodityDao.insert(commodity);
+		
+	}
+
+	@Override
+	public void delete(String productIds) {
+		 
+		String id= "";
+		String ids[] = productIds.split(",");
+		
+		for(int i=0;i<ids.length;i++){
+			id+="'"+ids[i]+"',";
+		}
+		id=id.substring(0, id.length()-1);
+		id="("+id+")";
+		commodityDao.delete(id);
+		
+	}
+
+	@Override
+	public void update(Commodity commodity) {
+		 commodityDao.update(commodity);
+		
+	}
+
+	@Override
+	public Commodity getCommodityById(String productId) {
+		return commodityDao.getCommodityById(productId);
+	}
+
+	@Override
+	public List<Commodity> getCommodityByCondition(String condition) {
+		return commodityDao.getCommodityByCondition(condition);
+	}
+
+}

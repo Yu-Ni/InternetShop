@@ -1,0 +1,123 @@
+package com.cqut.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.json.JSONArray;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.service.AdminManageService;
+import com.cqut.model.service.BuyerManagerService;
+
+@Controller
+@RequestMapping("/buyerManagerController")
+public class BuyerManagerController {
+	@Autowired
+	private BuyerManagerService service;
+	
+	/**
+	 * 
+	 * @Description: TODO
+	 * @param @param input
+	 * @param @return   
+	 * @return String  
+	 * @throws
+	 * @author wujiaxin
+	 * @date 2017��6��16��
+	 */
+	@RequestMapping("/queryByName") 
+	 @ResponseBody
+	 public String queryByName(String condition){
+		
+		condition = "%"+condition+"%";
+		 System.out.println(condition);
+		 return JSONArray.fromObject(service.queryByUserName(condition)).toString();
+		 
+	 }
+	/*
+	@RequestMapping("/selectByTypeId")
+	@ResponseBody
+	public String selectByTypeId(String typename){
+		System.out.println(typename);
+		Commodity commodity=service.selectByTypeId(typename);
+		List<Commodity> list=new ArrayList<Commodity>();
+		list.add(commodity);
+		return JSONArray.fromObject(list).toString();
+	}*/
+	
+/**
+ * 
+ * @Description: TODO
+ * @param @param productName
+ * @param @param typeId
+ * @param @param price
+ * @param @param productMargin
+ * @param @param img
+ * @param @param remark
+ * @param @return   
+ * @return String  
+ * @throws
+ * @author jiangxiuyu
+ * @date 2017��6��18��
+ */
+	
+	 @RequestMapping("/addBuyer") 
+	 @ResponseBody
+	 public String addBuyer(String username,String password,String telphone,String avatar,int sex ){
+		  
+		 Buyer buyer = new Buyer();
+		 buyer.setUsername(username);
+		 buyer.setPassword(password);
+		 buyer.setTelphone(telphone);
+		 buyer.setAvatar(avatar);
+		 buyer.setSex(sex);
+		 try {
+			 service.insert(buyer);
+			 return "ture";
+		} catch (Exception e) {
+			 return "false";
+
+		} 
+	 }
+	 
+	 @RequestMapping("/updateBuyer") 
+	 @ResponseBody
+	 public String updateBuyer(String buyerid,String username,String password,String telphone,String avatar,int sex ){		  
+
+		 Buyer buyer = new Buyer();
+		 buyer.setBuyerid(buyerid);
+		 buyer.setUsername(username);
+		 buyer.setPassword(password);
+		 buyer.setTelphone(telphone);
+		 buyer.setAvatar(avatar);
+		 buyer.setSex(sex);
+		 try {
+			 service.update(buyer);
+			 return "ture";
+		} catch (Exception e) {
+			 return "false";
+
+		} 
+ 	 }
+	 
+	 @RequestMapping("/delBuyer")  
+	    @ResponseBody
+		public String delBuyer(String buyers){
+		 try {
+			  service.delete(buyers);
+				return "1";
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+			return "0"; 
+		 
+		}
+
+}

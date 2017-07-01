@@ -1,0 +1,85 @@
+/**
+ * 
+ */
+$(function() {
+	initCart();
+});
+
+function initCart(){
+	$.ajax({
+		url : '../../../cartManageController/getCartList.do',
+		type : 'get',
+		dataType : 'json',
+		success : function(msg) { 
+			 var  obj = {"list":msg}; 
+			 var bt=baidu.template; 
+			 var html=bt('tpl',obj); 
+			 document.getElementById('cart_table').innerHTML=html;
+		}
+	});
+}
+
+function checkbox_click(){
+	var obj=document.getElementsByName("check_shop");
+	alert("111");
+	obj.onclick = function(){
+		var s=''; 
+		for(var i=0; i<obj.length; i++){ 
+			if(obj[i].checked){
+				console.log(obj[i].value);
+				s+=obj[i].value+',';
+			}
+		} 
+	}
+}
+
+function pay_click(){
+	var obj=document.getElementsByName("check_shop");
+	console.log(obj);
+	for(var i=0; i<obj.length; i++){ 
+		if(obj[i].checked){
+			console.log(obj[i].value);
+			s+=obj[i].value+',';
+		}
+	} 
+}
+
+function purcharse_good(cartid){
+	var param = {
+			cartid:cartid
+	}
+	$.ajax({
+		data:param,
+		url : '../../../cartManageController/addOrderByCart.do',
+		type : 'get',
+		dataType : 'json',
+		success : function(msg) { 
+			 if(msg[0].result == 'true'){
+				 alert("购买成功！");
+				 initCart();
+			 }else{
+				 alert("购买失败！");
+			 }
+		}
+	});
+}
+
+function purcharse_good_shop(shopid){
+	var param = {
+			shopid:shopid
+	}
+	$.ajax({
+		data:param,
+		url : '../../../cartManageController/addOrderByCart.do',
+		type : 'get',
+		dataType : 'json',
+		success : function(msg) { 
+			 if(msg[0].result == 'true'){
+				 alert("购买成功！");
+				 initCart();
+			 }else{
+				 alert("购买失败！");
+			 }
+		}
+	});
+}

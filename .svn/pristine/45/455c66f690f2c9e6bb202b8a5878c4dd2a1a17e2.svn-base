@@ -1,0 +1,12 @@
+package com.cqut.model.service;
+
+import java.util.List;
+import java.util.Map;
+
+public interface CartManageService {
+	public List<Map<String,Object>> getCartList(String username);
+	public int addOrderByCart(String cartid,String username);
+	public int deleteCart(String cartid);
+	public int addOrderByCartShop(String shopid,String username);
+	public int deleteCartShop(String username,String shopid);
+}

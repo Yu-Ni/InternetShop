@@ -1,0 +1,26 @@
+$(function() {
+	initOrder();
+});
+
+function initOrder(){
+	
+	$.ajax({ 
+		url : '../../../orderController/getOrderList.do',
+		type : 'get',
+		dataType : 'json',
+		success : function(msg) { 
+			 console.log(msg); 
+			 var  obj = {"list":msg}; 
+			 console.log(obj);
+			//使用baidu.template命名空间
+			 var bt=baidu.template; 
+			 var html=bt('tpl',obj); 
+			 //渲染
+			 document.getElementById('order_table').innerHTML=html;
+		}
+	});
+}
+
+function showOrder(obj){
+	 
+}

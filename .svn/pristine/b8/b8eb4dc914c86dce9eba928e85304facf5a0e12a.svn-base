@@ -1,0 +1,139 @@
+package com.cqut.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONArray;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cqut.model.pojo.Admin;
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Seller;
+import com.cqut.model.service.LoginService;
+
+@Controller
+@RequestMapping("/loginController")
+public class LoginController {
+	
+	@Autowired
+	private LoginService service;
+	
+	/**
+	 * 
+	 * 方法简述：用户登录
+	 * @param username 用户名
+	 * @param password 密码
+	 * @param role 用户角色(0：卖家，1：买家，2：管理员)
+	 * @return 
+	 * @author wangyuanling
+	 * @date 2017年6月15日 下午4:47:56
+	 */
+	@RequestMapping("/login") 
+	@ResponseBody
+	public String login(String username,String password,String roleString){
+		int role=Integer.parseInt(roleString);
+		String result = "fail";
+		try{
+			if(role==0){
+				Seller seller=service.loginSeller(username,password);
+				if(seller!=null){
+					result="./module/jsp/seller/Sellerindex.jsp";
+				}
+			}else if(role==1){
+				Buyer buyer=service.loginBuyer(username,password);
+				if(buyer!=null){
+					result="./module/jsp/buyer/Index.jsp";
+				}
+			}else{
+				Admin admin=service.loginAdmin(username,password);
+				if(admin!=null){
+					result="./module/jsp/admin/index.jsp";
+				}
+			}
+			
+		}catch(Exception e){
+			result = "fail";
+			e.printStackTrace();
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("result",result);
+		return JSONArray.fromObject(map).toString();
+	}
+	
+	/**
+	 * 
+	 * 方法简述：卖家注册
+	 * @param username
+	 * @param realname
+	 * @param password
+	 * @param bankNumber
+	 * @param phoneNumber
+	 * @param address
+	 * @param idCard
+	 * @return 
+	 * @author wangyuanling
+	 * @date 2017年6月18日 下午1:49:29
+	 */
+	@RequestMapping("/sellerRegister") 
+	@ResponseBody
+	public String sellerRegister(String username,String realname,String password,String bankNumber,String phoneNumber,String address,String idCard){
+		Seller seller = new Seller(username,realname,password,bankNumber,phoneNumber,address,idCard);
+		String result = (service.sellerRegister(seller)==1)?"true":"fail";
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("result",result);
+		return JSONArray.fromObject(map).toString();
+	}
+	
+	/**
+	 * 
+	 * 方法简述：买家注册
+	 * @param username
+	 * @param password
+	 * @param telphone
+	 * @param integral
+	 * @param avatar
+	 * @param sex
+	 * @return 
+	 * @author wangyuanling
+	 * @date 2017年6月18日 下午2:03:48
+	 */
+	@RequestMapping("/buyerRegister") 
+	@ResponseBody
+	public String buyerRegister(String username,String password,String telphone,String avatar,String sex){
+		Buyer buyer = new Buyer(username,password,telphone,0,avatar,Integer.parseInt(sex));
+		String result = (service.buyerRegister(buyer)==1)?"true":"fail";
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("result",result);
+		return JSONArray.fromObject(map).toString();
+	}
+	
+	/**
+	 * 
+	 * 方法简述：管理员注册
+	 * @param username
+	 * @param realname
+	 * @param password
+	 * @param telphone
+	 * @param avator
+	 * @param sex
+	 * @return 
+	 * @author wangyuanling
+	 * @date 2017年6月18日 下午2:03:28
+	 */
+	@RequestMapping("/adminRegister") 
+	@ResponseBody
+	public String adminRegister(String username,String realname,String password,String telphone,String avatar,int sex){
+		Admin admin = new Admin(username,realname,password,telphone,avatar,sex);
+		String result = (service.adminRegister(admin)==1)?"true":"fail";
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("result",result);
+		return JSONArray.fromObject(map).toString();
+	}
+	
+}

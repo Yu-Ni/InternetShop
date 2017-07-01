@@ -1,0 +1,63 @@
+package com.cqut.controller;
+
+
+import java.util.Enumeration;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cqut.model.pojo.Admin;
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.pojo.Shop;
+import com.cqut.model.service.AdminManageService;
+import com.cqut.model.service.ShopService;
+import com.cqut.util.UID;
+import com.google.gson.JsonObject;
+
+import net.sf.json.JSONObject;
+
+@Controller
+@RequestMapping("/ShopController")
+public class ShopController {
+	
+	@Autowired
+	private ShopService service;
+	
+	 @RequestMapping("/getShopInfo") 
+	 @ResponseBody
+	 public String getShopInfo(HttpServletRequest request){
+		 HttpSession session=request.getSession();
+		  String name=session.getAttribute("sellerId").toString();
+		 return JSONObject.fromObject(service.getShopInfo(name)).toString();
+	 }
+
+	 @RequestMapping("/addShop") 
+	 @ResponseBody
+	 public String addShop(HttpServletRequest request,String shopname){
+		
+		  HttpSession session=request.getSession();
+		  String name=session.getAttribute("sellerId").toString();
+		  if(service.getShopInfo(name)==null){
+			  String shopid = UID.createID();		
+				 Shop shop = new Shop();
+				 shop.setShopid(shopid);
+				 shop.setSellerId(name);
+				 shop.setShopname(shopname);
+				 shop.setShopage("0");
+			     service.insertInd(shop);	
+			     return "ture";
+		  }else {
+			return "false";
+		}
+		
+	 }	 
+}

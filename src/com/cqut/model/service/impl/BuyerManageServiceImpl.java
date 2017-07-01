@@ -1,0 +1,60 @@
+package com.cqut.model.service.impl;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.AdminDao;
+import com.cqut.model.dao.BuyerDao;
+import com.cqut.model.dao.CommodityDao;
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.service.BuyerManagerService;
+import com.cqut.util.MD5;
+import com.cqut.util.UID;
+@Service
+public class BuyerManageServiceImpl implements BuyerManagerService{
+	
+	@Autowired
+	private BuyerDao dao;
+	
+	@Override
+	public List<Buyer> queryByUserName(String input) {
+		// TODO Auto-generated method stub
+		return dao.queryByUserName(input);
+	}
+	/**
+	 * jxy
+	 */
+	
+	@Autowired
+	BuyerDao buyerDao; 
+	
+	@Override
+	public void insert(Buyer buyer) {
+		// TODO Auto-generated method stub
+			Calendar a=Calendar.getInstance();
+			String id= UID.createID(); 
+			String buyerid = "P"+a.get(Calendar.YEAR)+id;
+			buyer.setBuyerid(buyerid); 
+			buyer.setPassword(MD5.getMD5(buyer.getPassword()));
+			buyerDao.insert(buyer);
+			
+		}
+
+	@Override
+	public void update(Buyer buyer) {	
+		buyer.setPassword(MD5.getMD5(buyer.getPassword()));
+			 buyerDao.update(buyer);
+			
+		}
+
+	@Override
+	public void delete(String buyers) {
+			buyerDao.deleteBuyer(buyers);
+	}
+
+}

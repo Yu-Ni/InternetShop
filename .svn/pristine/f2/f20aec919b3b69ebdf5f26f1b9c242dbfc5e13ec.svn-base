@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.CartManageDao">
+	
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Cart" id="t_cart">
+		<id property="cartid" column="cartid"/>
+		<result property="productid" column="productid"/>
+		<result property="buyerid" column="buyerid"/>
+		<result property="number" column="number"/>
+		<result property="telphone" column="telphone"/>
+		<result property="time" column="time"/>
+	</resultMap>
+	
+	<resultMap type="com.cqut.model.pojo.Order" id="t_order">
+		<id property="orderId" column="orderid"/> 
+		<result property="shopId" column="shopId"/>
+		<result property="evaluationId" column="evaluationid"/>
+		<result property="buyerId" column="buyerid"/>
+ 		<result property="createTime" column="createtime"/>
+ 		<result property="price" column="price"/>
+ 		<result property="address" column="address"/>
+	</resultMap>
+	
+	<insert id="addOrderByCart">
+		insert into t_order(orderId,shopId,evaluationId,buyerId,createTime,price,address) 
+		values(#{orderId},#{shopId},#{evaluationId},#{buyerId},#{createTime},#{price},#{address})
+	</insert>
+	
+	<delete id="deleteCart">
+		delete from t_cart where t_cart.cartid = #{cartid}
+	</delete>
+	
+</mapper>

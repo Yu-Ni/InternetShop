@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+*{
+	margin:0;
+	padding:0;
+}
+
+#leftTab{
+	line-height:50px;
+}
+
+ul{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+a{
+	display:block;
+	width:98%;
+	height:25px;
+	text-decoration:none;
+	color:#ffffff;
+}
+
+body{
+	background-color:rgb(43,57,70);
+}
+
+a:link,a:visited{
+	background-color:#2B3946;
+	color:#16B398;
+}
+
+a:hover,actived{
+	background-color:#273542;
+	color:white;
+}
+
+li{
+	text-align:center;
+}
+
+li img{
+	position:relative;
+	top:35px;
+	right:55px;
+}
+
+/* #header{
+	color:white;
+	padding:5% 29%;
+	display:block;
+} */

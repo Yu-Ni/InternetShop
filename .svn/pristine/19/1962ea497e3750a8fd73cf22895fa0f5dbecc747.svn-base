@@ -1,0 +1,91 @@
+@CHARSET "UTF-8";
+
+.tble
+ {
+	top:30%;
+	position:absolute;
+	width:80%;
+	padding-left:10%;
+	
+ }
+ 
+ body{
+ margin: 0; 
+ padding: 0;
+ }
+ .button
+ {
+   margin-left:10px;
+   
+   position:relative;
+ }
+ .imgh
+ { 
+   position:absolute;
+   width:100%;
+   top:4%;
+   
+ }
+ .main-topbar {
+    height: 27px;
+    line-height: 27px;
+    border-bottom: solid 1px #DCDCDC;
+    background-color: #fbfbfb;
+    position:relative;
+    top:0px;
+}
+.content-inner {
+    width: 1190px;
+    margin: 0px auto;
+}
+.main-topbar .account {
+    float: left;
+    width: 50%;
+}
+.main-topbar .topnav {
+    float: right;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+    list-style:none; /* 将默认的列表符号去掉 */
+    padding:0; /* 将默认的内边距去掉 */
+    margin:0; /* 将默认的外边距去掉 */
+    float:left;
+     margin-left:10px;
+}
+ul {
+    display: block;
+    margin-left:10px;
+}
+
+.evalu
+{ 
+	width:80%;
+	padding-left:10%;
+    position: absolute;
+    top:35%;
+}
+
+.search {
+    float: right;
+    text-align: left;
+    width:60%;
+}
+.pagefen
+{
+	position: relative;
+	top:636px;
+right:280px;
+	float:right;
+}
+table {
+    background-color: rgba(15, 60, 154, 0.16) !important;
+     cellpadding:0 !important;
+      cellspacing:0 !important;
+}
+
+.fixed-table-container
+{
+	color:rgb(100,138,175) !important;
+}

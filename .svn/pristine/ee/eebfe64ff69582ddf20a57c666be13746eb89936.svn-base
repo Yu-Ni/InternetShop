@@ -1,0 +1,22 @@
+package com.cqut.model.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.cqut.model.pojo.Commodity;
+//表示该类是数据访问层
+@Repository
+public interface CommodityDao {
+
+	//增加
+	public void insert(Commodity commodity);
+	//删除
+	public void delete(String productIds);
+	//修改
+	public void update(Commodity commodity);
+	//查询
+	public Commodity getCommodityById(String productId);
+	//根据条件查询列表
+	public List<Commodity> getCommodityByCondition(String condition);
+}

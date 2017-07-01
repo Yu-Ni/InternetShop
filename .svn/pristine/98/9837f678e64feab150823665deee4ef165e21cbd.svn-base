@@ -1,0 +1,11 @@
+package com.cqut.model.service;
+
+import java.util.List;
+
+import com.cqut.model.pojo.Admin;
+
+
+public interface AdminManageService {
+	
+	public List<Admin> queryByName(String input);
+}

@@ -1,0 +1,98 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>卖家界面</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-table.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/admin/changeColor.css">
+<!-- <link rel="stylesheet" type="text/css"
+	href="./module/css/admin/buttons.css"> -->
+
+
+
+<script type="text/javascript" src="./module/js/frame/jquery.js"></script>
+<script type="text/javascript" src="./module/js/frame/jquery.min.js"></script>
+<script type="text/javascript" src="./module/js/frame/bootstrap.js"></script>
+<script type="text/javascript" src="./module/js/frame/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table.min.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript"
+	src="./module/js/frame/bootstrap-table-zh-CN.min.js"></script>
+
+
+
+</head>
+
+<body>
+	<div>
+		<button type="button" class="btn">&nbsp;新增</button>
+		<button type="button" onclick="openModal()" class="btn">&nbsp;修改</button>
+		<button id="del" onclick="delData()" type="button" class="btn">&nbsp;删除</button>
+		<button id="refresh" onclick="refresh()" type="button" class="btn">&nbsp;刷新</button>
+		<input type="text" class="txt">
+		<button id="search"  type="button" class="btn">&nbsp;查询</button>
+	</div>
+	<div>
+		<table id="tb">
+			<thead>
+				<tr>
+					<th data-field="sellerId">卖家账户</th>
+					<th data-field="userName">用户名</th>
+					<th data-field="realName">真实姓名</th>
+					<th data-field="password">密码</th>
+					<th data-field="bankNumber">银行账户</th>
+					<th data-field="phoneNumber">电话号码</th>
+					<th data-field="address">地址</th>
+            		<th data-field="id_card">身份证</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div>
+	<ul class="pagination">
+		<li><a href="#">&laquo;</a></li>
+		<li class="active"><a href="#">1</a></li>
+		<li class="disabled"><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+		<li><a href="#">&raquo;</a></li>
+	</ul>
+	</div>
+	<script type="text/javascript" src="./module/js/admin/sellerManager.js"></script>
+</body>
+</html>

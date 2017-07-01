@@ -1,0 +1,97 @@
+package com.cqut.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import net.sf.json.JSONArray;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.pojo.Seller;
+import com.cqut.model.service.AdminManageService;
+import com.cqut.model.service.SellManagerService;
+import com.cqut.util.MD5;
+
+@Controller
+@RequestMapping("/sellManageController")
+public class SellManageController {
+
+	@Autowired
+	private SellManagerService service;
+
+	@RequestMapping("/getSellerList")
+	@ResponseBody
+	public String getSellerList(String condition) {
+		condition = "%" + condition + "%";
+		return JSONArray.fromObject(service.getSellerByCondition(condition))
+				.toString();
+	}
+
+	@RequestMapping("/addSeller")
+	@ResponseBody
+	public String addSeller(String userName, String realName, String password,
+			String bankNumber, String phoneNumber, String address,
+			String id_card) { 
+		String passWord =MD5.getMD5(password);
+		Seller seller = new Seller(userName, realName, passWord, bankNumber,
+				phoneNumber, address, id_card);
+		try {
+			service.insert(seller);
+			return "ture";
+		} catch (Exception e) {
+			return "false";
+
+		}
+	}
+
+	@RequestMapping("/updateSeller")
+	@ResponseBody
+	public String updateSeller(String sellerId,String userName, String realName,
+			String password, String bankNumber, String phoneNumber,
+			String address, String id_card) {
+		String passWord =MD5.getMD5(password);
+		Seller seller = new Seller(sellerId,userName, realName, passWord, bankNumber,
+				phoneNumber, address, id_card);
+		try {
+			service.update(seller);
+			return "ture";
+		} catch (Exception e) {
+			return "false";
+
+		}
+	}
+
+	@RequestMapping("/delSeller")
+	@ResponseBody
+	public String delSeller(String sellerIds) {
+		try {
+			service.delete(sellerIds);
+			return "1";
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "0";
+
+	}
+	
+	/**
+	 * 
+	 * 方法简述：按照类别分类显示商品
+	 * @return 
+	 * @author wangyuanling
+	 * @date 2017年6月21日 下午7:56:23
+	 */
+	@RequestMapping("/getProductByType")
+	@ResponseBody
+	public String getProductByType(String searInput) {
+		List<Map<String,Object>> list = service.getProductByType(searInput);
+		return JSONArray.fromObject(list).toString();
+
+	}
+
+}

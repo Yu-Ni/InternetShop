@@ -1,0 +1,22 @@
+package com.cqut.model.service;
+
+import java.util.List;
+
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.pojo.Seller;
+
+public interface SellManagerService {
+	// 获取数据
+	// public List<Seller> getList(String input);
+	// 增加
+	public void insert(Seller seller);
+
+	// 修改
+	public void update(Seller seller);
+
+	public List<Seller> getSellerByCondition(String condition);
+
+	public void delete(String sellerIds);
+	 public String getSellerList(String condition);
+}

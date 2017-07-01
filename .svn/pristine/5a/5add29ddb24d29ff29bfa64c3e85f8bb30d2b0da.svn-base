@@ -1,0 +1,33 @@
+#mapper{
+	width:80%;
+	margin:0 auto;	
+}
+#header{
+	height:50px;	
+	opacity:0.8;
+}
+#Navigation li{
+	float:left;
+	margin-left:100px;
+	list-style:none;
+}
+#search{
+	margin:0 auto;	
+	margin-top:40px;
+}
+#search .btn{
+	background-color: rgb(254,112,62);
+}
+#SearchHeader{
+	margin-top:10px;
+	height:100px;
+}
+#SecondNav li{
+	float:left;
+	margin-left:100px;
+	list-style:none;
+}
+#nav{
+	height:30px;
+	border-bottom:5px solid rgb(254,112,62);
+}

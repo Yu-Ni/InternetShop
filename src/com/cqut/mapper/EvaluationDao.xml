@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.EvaluationDao">
+	
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Evaluation" id="t_evaluation">
+		<id property="evaluationid" column="evaluationid"/>
+		<result property="orderid" column="orderid"/>
+		<result property="time" column="time"/>
+		<result property="content" column="content"/>
+		<result property="buyerid" column="buyerid"/>
+	</resultMap>
+
+	
+	<!-- 查询 -->
+	<select id="getEvaluationByCondition" resultMap="t_evaluation" parameterType="String">
+		select * from t_evaluation where evaluationid like #{input}
+	</select>
+	<!-- 增加 -->
+	<select id="insert" resultMap="t_evaluation" parameterType="com.cqut.model.pojo.Evaluation">
+		insert into t_evaluation(evaluationid) values(#{adminid})
+	</select>
+	<!-- 删除 -->
+	<delete id="delete">
+		delete from  t_evaluation where evaluationid = #{evaluationid}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="update">
+		update t_evaluation set orderid=#{orderid},time=#{time},content=#{content},buyerid=#{buyerid} where evaluationid=#{evaluationid} 
+	</update> 
+</mapper>

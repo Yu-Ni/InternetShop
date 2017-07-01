@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Single</title>
+<link href="../../css/frame/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../../js/frame/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="../../css/buyer/Detailproduct.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<link type="text/css" rel="stylesheet" href="../../css/frame/bootstrap.min.css" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <script type="application/x-javascript"> 
+ addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+  </script>
+  <script type="text/javascript" src="../../js/frame/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/frame/baiduTemplate.js"></script>
+     <script type="text/javascript" src="../../js/frame/bootstrap.min.js"></script>
+    
+<!--fonts-->
+ <!--//fonts-->
+</head>
+<body> 
+<!--header-->
+	<div class="line"> 
+	<div class="nav_title">
+     <div class="left_info">
+      <ul>
+      <li>欢迎你***</li>
+      <li><a href="index.html">注销</a></li>
+      </ul>
+     </div>
+     <div class="right_info">
+      <ul>
+      <li><a href="#">购物车</a></li>
+      <li><a href="#">个人中心</a></li>
+      <li><a href="#">400-700-82219</a></li>
+      <li></li>
+      </ul>
+     </div> 
+    </div>
+	</div>
+<!---->	
+	<div class="container">
+<div class="single">
+				<div class="col-md-9 top-in-single">
+					<div class="col-md-5 single-top">	
+						<div class="flexslider">
+							        <!-- FlexSlider -->
+										<script src="../../js/frame/imagezoom.js"></script>
+										  <script defer src="../../js/frame/jquery.flexslider.js"></script>
+										<link rel="stylesheet" href="../../css/frame/flexslider.css" type="text/css" media="screen" />
+
+										<script>
+										// Can also be used with $(document).ready()
+										$(window).load(function() {
+										  $('.flexslider').flexslider({
+											animation: "slide",
+											controlNav: "thumbnails"
+										  });
+										});
+										</script>
+									<!-- //FlexSlider-->
+									  <ul class="slides">
+										<li data-thumb="../../img/buyer/s8.jpg">
+											<div class="thumb-image"> <img src="../../img/buyer/s8.jpg" data-imagezoom="true" class="img-responsive"> </div>
+										</li>
+										<li data-thumb="../../img/buyer/s8.jpg">
+											<div class="thumb-image"> <img src="../../img/buyer/s8.jpg" data-imagezoom="true" class="img-responsive"> </div>
+										</li>
+										<li data-thumb="../../img/buyer/s8.jpg">
+											<div class="thumb-image"> <img src="../../img/buyer/s8.jpg" data-imagezoom="true" class="img-responsive"> </div>
+										</li>
+										<li data-thumb="../../img/buyer/s8.jpg">
+											<div class="thumb-image"> <img src="../../img/buyer/s8.jpg" data-imagezoom="true" class="img-responsive"> </div>
+										</li>
+										 
+									  </ul>
+									<div class="clearfix"></div>
+						</div>
+					</div>	
+					<div class="col-md-7 single-top-in" id="detailDiv">
+					</div>
+					<script id="tpl" type="text/html">
+						<div class="single-para"> 
+                            <input id="productId" type="hidden" value="<%=data[0].productId%>"/>
+                            <input id="shopId" type="hidden" value="<%=data[0].shopId%>"/>
+
+							
+                            <h4><%=data[0].productName%></h4>
+							<p><%=data[0].description%></p>
+							<div class="star">
+								<ul>
+									<li><i>1 </i></li>
+									<li><i>2</i></li>
+									<li><i>3 </i></li>
+									<li><i>4 </i></li>
+									<li><i>5</i></li>
+								</ul>
+								 
+							<div class="clearfix"> </div>
+							</div>
+							
+								<label class="add-to">￥</label> 
+                                <label  class="add-to" id="price"><%=data[0].price%></label>
+                                  
+							
+							<div class="available">
+								<h6>规格 :</h6>
+
+								 <input class="form-control" id="number" value="1"/>
+						</div> 
+						    <div class="pay">
+								<a href="#" class="cart ">添加到购物车</a> <a  class="cart " href="javascript:void(0);" onclick="buynow()">直接购买</a>
+							</div>
+						</div>
+						</script>
+					
+				<div class="clearfix"> </div>
+				<div class="product-top">
+		 
+		 
+		 
+	<div class="clearfix"> </div>
+	</div>
+				</div>
+				 
+				<div class="clearfix"> </div>		
+		</div>
+	</div>
+
+	<!---->
+<!--footer-->
+	<div class="footer">
+	
+	</div>
+	<script type="text/javascript" src="../../js/buyer/Detailproduct.js"></script>
+</body>
+</html>

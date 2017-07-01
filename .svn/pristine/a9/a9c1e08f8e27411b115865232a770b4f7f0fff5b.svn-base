@@ -1,0 +1,64 @@
+package com.cqut.model.pojo;
+
+import java.util.Date;
+
+public class Order {
+
+	private String orderId;
+	private String cartId;
+	private String evaluationId;
+	private String buyerId;
+	private Date createTime;
+	private double price;
+	private String address;
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+	public String getCartId() {
+		return cartId;
+	}
+	public void setCartId(String cartId) {
+		this.cartId = cartId;
+	}
+	public String getEvaluationId() {
+		return evaluationId;
+	}
+	public void setEvaluationId(String evaluationId) {
+		this.evaluationId = evaluationId;
+	}
+	public String getBuyerId() {
+		return buyerId;
+	}
+	public void setBuyerId(String buyerId) {
+		this.buyerId = buyerId;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", cartId=" + cartId
+				+ ", evaluationId=" + evaluationId + ", buyerId=" + buyerId
+				+ ", createTime=" + createTime + ", price=" + price
+				+ ", address=" + address + "]";
+	}
+	 
+}

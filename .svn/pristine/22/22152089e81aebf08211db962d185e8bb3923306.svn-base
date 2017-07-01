@@ -1,0 +1,75 @@
+#mapper{
+	width:80%;
+	margin:0 auto;	
+}
+#header{
+	height:50px;	
+	opacity:0.8;
+}
+#Navigation li{
+	float:left;
+	margin-left:100px;
+	list-style:none;
+}
+#search{
+	margin:0 auto;	
+	margin-top:40px;
+}
+#search .btn{
+	background-color: rgb(254,112,62);
+}
+#SearchHeader{
+	margin-top:10px;
+	height:100px;
+}
+#SecondNav li{
+	float:left;
+	margin-left:100px;
+	list-style:none;
+}
+#nav{
+	height:30px;
+	border-bottom:5px solid rgb(254,112,62);
+}
+#myCarousel{
+	width:100%;
+	height:350px;
+	opacity:0.9;
+}
+.carousel {
+    height: 350px;
+    background-color: #000;
+  }
+.carousel .item {
+  height: 350px;
+  background-color: #000;
+}
+.carousel img {
+  width: 100%;
+  height:100%;
+}
+.carousel-caption {
+  margin-bottom: 20px;
+  line-height: 1.8;
+  font-family: "Î¢ÈíÑÅºÚ";
+}
+ .panel{
+ width:100%;
+ /* height:360px; */
+ overflow:scroll;
+ }
+ .panel-heading{
+ background-color: rgb(254,112,62);
+ }
+ .panel-body{
+ height:300px;
+ }
+ #footer{
+ width:100%;
+ height:150px;
+ background-color: #000;
+ }
+ .panel-footer{
+ border-bottom-color:#fff !important;
+ background-color: #fff !important;
+ }

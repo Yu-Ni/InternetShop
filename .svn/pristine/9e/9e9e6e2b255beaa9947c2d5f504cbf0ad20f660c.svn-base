@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>商品详情</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link rel="stylesheet"	type="text/css" href="../../css/frame/bootstrap.css"  media="all" />
+	<link rel="stylesheet"	type="text/css" href="../../css/buyer/Detailproduct.css"  media="all" />
+	<link rel="stylesheet" type="text/css" href="../../css/frame/flexslider.css"  media="screen" />
+	<link rel="stylesheet" type="text/css"  href="../../css/frame/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/frame/bootstrap-dialog.min.css">
+	
+	<script type="text/javascript" src="../../js/frame/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/frame/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/frame/baiduTemplate.js"></script>
+	<script type="text/javascript" src="../../js/frame/bootstrap.min.js"></script>
+	<script src="../../js/frame/imagezoom.js"></script>
+	<script defer src="../../js/frame/jquery.flexslider.js"></script>
+	<script type="text/javascript" src="../../js/frame/bootstrap-dialog.min.js"></script>
+	
+	<script type="application/x-javascript"> 
+	 addEventListener("load", 
+	 	function() { 
+	 		setTimeout(hideURLbar, 0); 
+	 	},
+	 false);
+	 	 
+	 function hideURLbar(){ 
+	 	window.scrollTo(0,1); 
+	 }
+	 
+	 $(window).load(function() {
+	  $('.flexslider').flexslider({
+		animation: "slide",
+		controlNav: "thumbnails"
+	  });
+	  
+	 });
+	 
+	</script>
+
+</head>
+<body>
+	<iframe src="../../jsp/buyer/navTab.jsp" width="100%" height="45px"></iframe>
+	<div class="container">
+		<div class="single">
+			<div class="col-md-9 top-in-single">
+				<div class="col-md-5 single-top">
+					<div class="flexslider">
+						<ul class="slides" id="slides"></ul>
+							<script id="tpl2" type="text/html">
+								<li data-thumb="../../../upload/<%=data[0].img%>">
+									<div class="thumb-image">
+										<img src="../../../upload/<%=data[0].img%>" data-imagezoom="true"	class="img-responsive" ">
+									</div>
+								</li>
+								<li data-thumb="../../../upload/<%=data[0].img%>">
+									<div class="thumb-image">
+										<img src="../../../upload/<%=data[0].img%>" data-imagezoom="true"
+										class="img-responsive">
+									</div>
+								</li>
+								<li data-thumb="../../../upload/<%=data[0].img%>">
+									<div class="thumb-image">
+										<img src="../../../upload/<%=data[0].img%>" data-imagezoom="true"
+										class="img-responsive">
+									</div>
+								</li>
+								<li data-thumb="../../../upload/<%=data[0].img%>">
+									<div class="thumb-image">
+										<img src="../../../upload/<%=data[0].img%>" data-imagezoom="true"
+										class="img-responsive">
+									</div>
+								</li>
+							</script>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="col-md-7 single-top-in" id="detailDiv"></div>
+				<script id="tpl" type="text/html">
+						<div class="single-para"> 
+                            <input id="productId" type="hidden" value="<%=data[0].productId%>"/>
+                            <input id="shopId" type="hidden" value="<%=data[0].shopId%>"/>
+                            <h4><%=data[0].productName%></h4>
+							<p><%=data[0].description%></p>
+							<div class="star">
+								<div class="clearfix"> </div>
+							</div>
+							<label class="add-to">￥</label> 
+                            <label class="add-to" id="price"><%=data[0].price%></label>
+							<div class="available">
+								<h6>商品库存 :</h6>
+								<span><%=data[0].productMargin%>件</span>
+							</div> 
+							<div class="available">
+								<h6>购买数量 :</h6>
+								 <input class="form-control" id="number" value="1" width="100" />
+							</div> 
+						    <div class="pay">
+								<a class="cart" href="javascript:addtocart()" >添加到购物车</a> 
+								<a class="cart" href="javascript:buynow()" >直接购买</a>
+							</div>
+						</div>
+				</script>
+				<div class="clearfix"></div>
+				<div class="product-top">
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+
+	<div class="footer"></div>
+	<script type="text/javascript" src="../../js/buyer/Detailproduct.js"></script>
+</body>
+</html>

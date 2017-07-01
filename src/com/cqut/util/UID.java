@@ -1,0 +1,20 @@
+package com.cqut.util;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class UID {
+	
+	private static final SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+	private static String preId = "";
+	
+	public static String createID(){
+		String id = format.format(Calendar.getInstance().getTime());
+		while(id.equals(preId)){
+			id = format.format(Calendar.getInstance().getTime());
+		}
+		preId = id;
+		return id;
+	} 
+	 
+}

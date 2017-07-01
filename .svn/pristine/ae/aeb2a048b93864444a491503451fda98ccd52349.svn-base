@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.OrderDao">
+	
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Order" id="t_order">
+		<id property="orderId" column="orderid"/> 
+		<result property="shopId" column="shopid"/>
+		<result property="evaluationId" column="evaluationid"/>
+		<result property="buyerId" column="buyerid"/>
+ 		<result property="createTime" column="createtime"/>
+ 		<result property="price" column="price"/>
+ 		<result property="address" column="address"/>
+  		
+	</resultMap>
+	<!-- 增加 -->
+	<select id="insert" resultMap="t_order" parameterType="com.cqut.model.pojo.Order">
+		insert into t_order(orderid,shopid,evaluationid,buyerid,createtime,price,address) values(#{orderId},#{shopId},#{evaluationId},#{buyerId},#{createTime},#{price},#{address})
+	</select>
+	
+	  
+	<!-- 查询 -->
+	<select id="getOrderByCondition" resultMap="t_order" parameterType="String">
+		select * from t_order where orderid like #{input}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		delete from t_order where orderid = #{orderId}
+	</delete>
+	
+	<!-- 根据id获取信息 -->
+	<select id="getOrderById" resultMap="t_order" parameterType="String">
+		select * from t_order where orderid = #{orderId}
+	</select>
+	
+</mapper>

@@ -1,0 +1,55 @@
+package com.cqut.model.pojo;
+
+public class Seller {
+
+	private String sellerId;
+	private String userName;
+	private String realName;
+	private String password;
+	private String bankNumber;
+	private String phoneNumber;
+	public String getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getBankNumber() {
+		return bankNumber;
+	}
+	public void setBankNumber(String bankNumber) {
+		this.bankNumber = bankNumber;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	@Override
+	public String toString() {
+		return "Seller [sellerId=" + sellerId + ", userName=" + userName
+				+ ", realName=" + realName + ", password=" + password
+				+ ", bankNumber=" + bankNumber + ", phoneNumber=" + phoneNumber
+				+ "]";
+	}
+	  
+}

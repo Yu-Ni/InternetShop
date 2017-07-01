@@ -1,0 +1,35 @@
+package com.cqut.model.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.LoginDao;
+import com.cqut.model.pojo.Admin;
+import com.cqut.model.pojo.Buyer;
+import com.cqut.model.pojo.Seller;
+import com.cqut.model.service.LoginService;
+
+@Service
+public class LoginServiceImpl implements LoginService{
+	
+	@Autowired
+	private LoginDao dao;
+	
+	@Override
+	public Seller loginSeller(String username, String password) {
+		return dao.loginSeller(username,password);
+	}
+	
+	@Override
+	public Buyer loginBuyer(String username, String password) {
+		return dao.loginBuyer(username,password);
+	}
+
+	@Override
+	public Admin loginAdmin(String username, String password) {
+		return dao.loginAdmin(username,password);
+	}
+
+}

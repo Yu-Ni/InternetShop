@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.CommodityDao">
+	
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Commodity" id="t_commodity">
+		<id property="productId" column="productid"/> 
+		<result property="shopId" column="shopid"/>
+		<result property="typeId" column="typeid"/>
+		<result property="productName" column="productname"/>
+ 		<result property="productMargin" column="productmargin"/>
+ 		<result property="price" column="price"/>
+ 		<result property="img" column="img"/>
+ 		<result property="remark" column="remark"/>
+ 		<result property="description" column="description"/>
+	</resultMap>
+	
+	<!-- 增加 -->
+	<select id="insert" resultMap="t_commodity" parameterType="com.cqut.model.pojo.Commodity">
+		insert into t_commodity(productid,shopid,typeid,productname,productmargin,price,img,remark,description) values(#{productId},#{shopId},#{typeId},#{productName},#{productMargin},#{price},#{img},#{remark},#{description})
+	</select>
+	
+	  
+	<!-- 查询 -->
+	<select id="getCommodityByCondition" resultMap="t_commodity" parameterType="String">
+		select * from t_commodity where productname like #{input}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		delete from t_commodity where productid = #{productIds}
+	</delete>
+	
+	<!-- 根据id获取信息 -->
+	<select id="getCommodityById" resultMap="t_commodity" parameterType="String">
+		select * from t_commodity where productid = #{productId}
+	</select>
+	
+	<!-- 编辑 -->
+	<update id="update">
+		update t_commodity set shopid=#{shopId},typeid=#{typeId},productname=#{productName},productmargin=#{productMargin},price=#{price},img=#{img},remark=#{remark},description=#{description} where productid=#{productId} 
+	</update> 
+	
+	<select id="getAllGoodType" resultMap="t_commodity" parameterType="String">
+		select * from t_commodity where productid = #{productId}
+	</select>
+</mapper>

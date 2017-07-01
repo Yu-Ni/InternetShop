@@ -1,0 +1,26 @@
+$(function(){
+	getCommByType();
+});
+function getCommByType(){
+	$.ajax({
+		data:{typename:'22'},
+		url:'buyerController/selectByTypeId.do',
+		type:'post',  
+		dataType:'json',
+		success:function(msg) { 
+			 
+			var obj=msg; 
+			console.log(obj);
+	    	/* if(msg){
+		    		var artcontent= "";
+		    		var myobj=eval(msg);
+		    		alert(myobj);
+		    		artcontent =  "<div class='a'>"+ myobj[0].artContent + "</div>";
+		    		var content = document.getElementById("labProfile");
+			    	content.innerHTML = artcontent;
+			    	content.innerHTML = content.innerHTML.substr(0,200) + "......";
+		    		
+		    	}*/
+		 }
+	});	
+}

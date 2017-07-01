@@ -1,0 +1,70 @@
+package com.cqut.model.service.impl;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import oracle.sql.DATE;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.CommodityDao;
+import com.cqut.model.dao.SearchDao;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.pojo.Type;
+import com.cqut.model.service.CommodityService;
+import com.cqut.util.UID;
+
+
+@Service
+public class CommodityServiceImpl implements CommodityService {
+
+	@Autowired
+	CommodityDao commodityDao; 
+	
+	@Autowired
+	SearchDao searchDao;
+	
+	@Override
+	public void insert(Commodity commodity) {
+		 
+		Calendar a=Calendar.getInstance();
+		String id= UID.createID();
+		String productId = "P"+a.get(Calendar.YEAR)+id;
+		commodity.setProductId(productId); 
+		commodityDao.insert(commodity);
+		
+	}
+
+	@Override
+	public void delete(String productIds) {
+		commodityDao.delete(productIds);
+	}
+
+	@Override
+	public void update(Commodity commodity) {
+		 commodityDao.update(commodity);
+		
+	}
+
+	@Override
+	public Commodity getCommodityById(String productId) {
+		return commodityDao.getCommodityById(productId);
+	}
+
+	@Override
+	public List<Commodity> getCommodityByCondition(String condition) {
+		return commodityDao.getCommodityByCondition(condition);
+	}
+
+	@Override
+	public List<Map<String,Object>> getAllGoodType() {
+		String[] property = {
+				"*"
+		};
+		return  searchDao.searchForeign(property, " t_type ", null, null, null, null);
+	}
+
+}

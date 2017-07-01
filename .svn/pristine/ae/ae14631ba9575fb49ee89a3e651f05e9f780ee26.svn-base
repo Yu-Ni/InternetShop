@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.BuyerDao">
+	
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Commodity" id="t_commodity">
+		<id property="productId" column="productId" />
+		<result property="shopId" column="shopId" />
+		<result property="productName" column="productName" />
+		<result property="productMargin" column="productMargin" />
+		<result property="price" column="price" />
+		<result property="img" column="img" />
+		<result property="typeId" column="typeId" />
+		<!-- 配置外键结果集 -->
+		<association property="typeId" javaType="com.cqut.model.pojo.Type"
+			column="typeId">
+			<id property="typeId" column="typeId" />
+			<result property="typename" column="typename" />
+			<result property="remark" column="remark" />
+		</association>
+	</resultMap>
+	<resultMap type="com.cqut.model.pojo.Buyer" id="t_buyer">
+		<id property="buyerid" column="buyerid"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="telphone" column="telphone"/>
+		<result property="integral" column="integral"/>
+		<result property="avatar" column="avatar"/>
+		<result property="sex" column="sex"/>
+	</resultMap>
+	<!-- 登录 -->
+	<select id="selectByTypeName" resultMap="t_commodity"
+		parameterType="com.cqut.model.dao.BuyerDao">
+		SELECT productId,productName,img,price FROM t_commodity
+		LEFT JOIN t_type ON t_type.typeid=t_commodity.typeId
+		WHERE typename = #{typename}
+	</select>
+	<!-- 根据id获取个人信息 -->
+	<select id="queryByUserName" resultMap="t_buyer" parameterType="String">
+		select * from t_buyer where username like #{input}
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert"  parameterType="com.cqut.model.pojo.Buyer">
+		insert into t_buyer(buyerid,username,password,telphone,avatar,sex) values(#{buyerid},#{username},#{password},#{telphone},#{avatar},#{sex})
+	</insert>
+	
+	<!-- 编辑 -->
+	<update id="update">
+		update t_buyer set username=#{username},password=#{password},telphone=#{telphone},avatar=#{avatar},sex=#{sex} where buyerid=#{buyerid} 
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		delete from t_buyer where buyerid in #{buyerid}
+	</delete> 
+	
+	
+</mapper>

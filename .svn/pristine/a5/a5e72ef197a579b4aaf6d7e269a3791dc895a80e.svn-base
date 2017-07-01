@@ -1,0 +1,20 @@
+package com.cqut.model.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.cqut.model.pojo.Admin;
+import com.cqut.model.pojo.Commodity;
+
+@Repository
+public interface AdminDao {
+	//Ôö¼Ó
+   public void insert(Admin admin);
+   
+   public List<Admin> getAdminByCondition(String condition);
+ //É¾³ý
+ 	public void delete(String adminids);
+ 	//ÐÞ¸Ä
+  	public void update(Admin admin);
+}

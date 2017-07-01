@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.bootstrap-table .table thead>tr>th{
+background-color: gray !important;
+}
+#tb tbody>tr:hover {
+	background-color: silver !important;
+}
+#tb {
+	background: url('/InternetShop/module/img/admin/tablebackground.jpg');
+	background-repeat: no-repeat;
+	background-size: 100%
+}

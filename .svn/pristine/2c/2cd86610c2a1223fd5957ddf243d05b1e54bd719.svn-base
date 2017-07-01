@@ -1,0 +1,74 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'login.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" href="module/css/Login/lrtk.css">
+	<script src="./module/frame/jquery.min.js"></script>
+	<script src="./module/js/Login/login.js"></script>
+
+  </head>
+  
+  <body>
+   <div id="login">
+    <div class="wrapper">
+        <div class="login">
+            <form action="http://www.lanrentuku.com/" method="post" class="container offset1 loginform">
+                <div id="owl-login">
+                    <div class="hand"></div>
+                    <div class="hand hand-r"></div>
+                    <div class="arms">
+                        <div class="arm"></div>
+                        <div class="arm arm-r"></div>
+                    </div>
+                </div>
+                <div class="pad" style="">
+                    <input type="hidden" name="_csrf" value="9IAtUxV2CatyxHiK2LxzOsT6wtBE6h8BpzOmk=">
+                    <div class="control-group">
+                        <div class="controls">
+                            <label for="email" class="control-label fa fa-envelope"></label>
+                            <input id="email" type="email" name="email" placeholder="Email" tabindex="1" autofocus="autofocus" class="form-control input-medium">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label for="password" class="control-label fa fa-asterisk"></label>
+                            <input id="password" type="password" name="password" placeholder="Password" tabindex="2" class="form-control input-medium">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                         <div class="controls">
+								<fieldset>
+									<legend align="left">请选择身份进入网上购物系统</legend>
+									<input type=radio name="book" checked>卖家
+									<input type=radio name="book">买家
+									<input type=radio name="book">管理员 <br>
+								</fieldset>
+							</div>
+                    </div>
+                </div>
+                <div class="form-actions"><a href="http://www.lanrentuku.com/" tabindex="5" class="btn pull-left btn-link text-muted">忘记密码?</a><a href="http://www.lanrentuku.com/" tabindex="6" class="btn btn-link text-muted">注册</a>
+                    <button type="submit" tabindex="4" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+  </body>
+</html>

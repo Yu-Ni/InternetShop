@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.BuyerDao">
+
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Commodity" id="t_commodity">
+		<id property="productid" column="productid" />
+		<result property="shopid" column="shopid" />
+		<result property="productname" column="productname" />
+		<result property="productmargin" column="productmargin" />
+		<result property="price" column="price" />
+		<result property="img" column="img" />
+		<result property="typeid" column="typeid" />
+		<!-- 配置外键结果集 -->
+		<association property="typeid" javaType="com.cqut.model.pojo.Type"
+			column="typeid">
+			<id property="typeid" column="typeid" />
+			<result property="typename" column="typename" />
+			<result property="remark" column="remark" />
+		</association>
+	</resultMap>
+
+	<!-- 登录 -->
+	<select id="selectByTypeId" resultMap="t_commodity"
+		parameterType="com.cqut.model.dao.BuyerDao">
+		SELECT productid,productname,img FROM t_commodity
+		LEFT JOIN t_type ON t_type.typeid=t_commodity.typeid
+		WHERE typename = #{typename}
+	</select>
+
+</mapper>

@@ -1,0 +1,142 @@
+package com.cqut.controller;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.service.AdminManageService;
+import com.cqut.model.service.CommodityService;
+
+@Controller
+@RequestMapping("/commodityManagerController")
+public class CommodityManagerController {
+
+	@Autowired
+	private CommodityService service;
+	
+	@RequestMapping("/getCommodity") 
+	 @ResponseBody
+	 public String getCommodity(String productId){ 
+		 return JSONArray.fromObject(service.getCommodityById(productId)).toString();
+	 }
+	
+	 @RequestMapping("/getCommodityList") 
+	 @ResponseBody
+	 public String getCommodityList(String condition){
+		 
+			 condition = "%"+""+"%"; 
+		 return JSONArray.fromObject(service.getCommodityByCondition(condition)).toString();
+	 }
+	 
+	 @RequestMapping("/addCommodity") 
+	 @ResponseBody
+	 public void addCommodity(MultipartFile image,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		  
+		 String uploadUrl = request.getServletContext().getRealPath("/upload/");
+		 String typeId = request.getParameter("typeid");
+		 String productName = request.getParameter("productname");
+		 String shopId = request.getParameter("shopid");
+ 		 String margin = request.getParameter("margin");
+		 String productPrice = request.getParameter("price");
+		 String remark = request.getParameter("remark");
+		 String description = request.getParameter("description");
+		 
+		 String fileName = "";
+		 if(image.getSize()!=0){
+				fileName = image.getOriginalFilename();
+			}else{
+				fileName="emptyImg.jpg";
+			}
+			String productimg = fileName;
+		 
+			
+			
+		 double price = Double.parseDouble(productPrice);
+		 int productMargin = Integer.parseInt(margin);
+		  
+		 Commodity commodity = new Commodity();
+		 commodity.setTypeId(typeId);
+		 commodity.setProductName(productName);
+		 commodity.setShopId("002");
+  		 commodity.setPrice(price);
+  		 commodity.setImg(productimg);
+  		 commodity.setRemark(remark);
+  		 commodity.setProductMargin(productMargin);
+  		 commodity.setDescription(description);
+
+  	// 判断最终上传文件是否存在，如果不存在，则创建相应的文件
+  				File targetFile = new File(uploadUrl+fileName); 
+  				try {
+  					 service.insert(commodity);
+  					 if(!targetFile.exists()){
+  						try {
+  							targetFile.createNewFile();
+  							image.transferTo(targetFile);
+  						} catch (IOException e) {
+  							e.printStackTrace();
+  						}
+  					}
+				} catch (Exception e) { 
+						request.setAttribute("result","添加失败！"); 
+				}   
+  				try {
+					request.getRequestDispatcher("../module/jsp/seller/CommodityIndex.jsp").forward(request,response);
+				} catch (ServletException e) {
+					e.printStackTrace();
+				} 
+ 	 }
+	 
+	 @RequestMapping("/delCommodity")  
+	    @ResponseBody
+		public String delCommodity(String productIds){
+		 try {
+			  service.delete(productIds);
+				return "1";
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+			return "0"; 
+		 
+		}
+	 
+	 
+	 @RequestMapping("/updateCommodity") 
+	 @ResponseBody
+	 public String updateCommodity(String productId,String productName,String typeId,String price,String productMargin,String img,String remark,String description ){
+		  
+		 double p = Double.parseDouble(price);
+		 int margin = Integer.parseInt(productMargin);
+		 Commodity commodity = new Commodity();
+		 commodity.setProductId(productId);
+		 commodity.setTypeId(typeId);
+		 commodity.setProductName(productName);
+		 commodity.setShopId("12");
+  		 commodity.setPrice(p);
+  		 commodity.setImg(img);
+  		 commodity.setRemark(remark);
+  		 commodity.setProductMargin(margin);
+  		 commodity.setDescription(description);
+
+		 try {
+			 service.update(commodity);
+			 return "ture";
+		} catch (Exception e) {
+			 return "false";
+
+		} 
+ 	 }
+
+}

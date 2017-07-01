@@ -1,0 +1,76 @@
+package com.cqut.model.service.impl;
+
+import java.util.Calendar;
+import java.util.List;
+
+
+
+import java.util.UUID;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.AdminDao;
+import com.cqut.model.dao.BuyerDao;
+import com.cqut.model.dao.CommodityDao;
+import com.cqut.model.pojo.Admin;
+import com.cqut.model.service.AdminManageService;
+
+@Service
+public class AdminManageServiceImpl implements AdminManageService {
+	@Autowired
+	private AdminDao dao;
+
+	/*@Override
+	public List<Admin> queryByName(String input) {
+		// TODO Auto-generated method stub
+		return dao.queryByName(input);
+	}
+*/
+	@Override
+	public void insert(Admin admin) {
+		// TODO Auto-generated method stub
+		String adminid = UUID.randomUUID().toString().replaceAll("-", ""); 
+		admin.setAdminid(adminid);
+		dao.insert(admin);		
+	}
+
+	@Override
+	public String getAdminList(String condition) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Admin> getAdminByCondition(String condition) {
+		// TODO Auto-generated method stub
+	
+		return dao.getAdminByCondition(condition);
+	
+	}
+
+	@Override
+	public void delete(String adminids) {
+		// TODO Auto-generated method stub
+		String id= "";
+		String ids[] = adminids.split(",");
+		
+		for(int i=0;i<ids.length;i++){
+			id+="'"+ids[i]+"',";
+		}
+		id=id.substring(0, id.length()-1);
+		id="("+id+")";
+		dao.delete(id);
+		
+	}
+
+	@Override
+	public void update(Admin admin) {
+		// TODO Auto-generated method stub
+		dao.update(admin);
+		
+	}
+	
+	
+}

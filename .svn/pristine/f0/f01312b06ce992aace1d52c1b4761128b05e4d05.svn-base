@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>购物车</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="../../css/buyer/shopCart.css">
+	<link rel="stylesheet" type="text/css" href="../../css/frame/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/frame/bootstrap-dialog.min.css">
+	<script type="text/javascript" src="../../js/frame/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/frame/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../js/frame/baiduTemplate.js"></script>
+	<script type="text/javascript" src="../../js/frame/bootstrap-dialog.min.js"></script>
+
+  </head>
+  
+  <body>
+    <iframe src="../../jsp/buyer/navTab.jsp" width="100%" height="45px"></iframe>
+    	<div id="mainDiv">
+    		<div class="titleDiv">
+				<div class="searchDiv">
+					<select name="goodType" class="goodType" id="goodType"> 
+						<option value="0">&nbsp;&nbsp;宝&nbsp;&nbsp;贝</option> 
+						<option value="1">&nbsp;&nbsp;店&nbsp;&nbsp;铺</option> 
+					</select> 
+					<input type="text" name="searchContent" class="searchContent" id="searchContent"/>
+					<input type="button" value="搜索" class="searchBtn" onclick="search()"/>
+				</div>
+			</div>
+    		<div class="detailDiv">
+    			<div class="detail_nav">
+					<span>已选商品</span>
+					<span class="sum_money" id="sum_money">0.00</span>
+					<span class="calcul_btn"><a href="javascript:purcharse_good_shop()" >结算</a></span>
+				</div>
+    		</div>
+    		<div class="detail_list">
+				<table class="cart_table_header">
+					<tbody class="header_tbody">
+						<tr class="tr1" >
+							<td align="center" class="productInfo">商品信息</td>
+							<td align="center">单价</td>
+							<td align="center">数量</td>
+							<td align="center">金额</td>
+							<td align="center">商品操作</td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="cart_table" class="cart_table"></div>
+				
+				<div class="footer">
+					<div>
+						<span>已选商品</span>
+						<span class="check_amount2" id="sum_amount">0</span>件
+						<span class="sum_money2" id="sum_money2">0.00</span>
+						<span class="calcul_btn2">
+							<input type="button" value="结算" onclick="javascript:purcharse_good_shop()"/>
+						</span>
+					</div>
+				</div>
+			</div>
+    	</div>
+
+
+	<script id="tpl" type="text/html">
+		<%for(var i =0;i<list.length;i++) {%>
+			<table class="cart_table_content" >
+				<thead class="cart_title" >
+					<tr >
+					     <td class="td1" colspan="5">
+							<span>
+								<input type="radio" name="check_shop" value=<%=list[i].purchase_amountType %> onclick="checkbox_click()"/>
+							</span>
+					     	<span>店铺：</span>
+					     	<span  id="order_shop"><%=list[i].shopname%></span>
+					     </td>
+					 </tr>
+				</thead>
+				<tfoot></tfoot>
+          <% var itemlist = list[i].product %>
+          <%for(var j =0;j<itemlist.length;j++) {%>
+				<tbody class="cart_detail">
+					 <tr>
+					     <td id="product_name">
+					     	<div class="product_container">
+					     		<div class="product_img">
+					     			<a href="#">	
+					     				<img id="product_img" width="60px" height="60px"  src="../../../upload/<%=itemlist[j].img%>" />
+					     			</a> 
+					     		</div>
+					     		<div class="product_info">
+		     						<span id="order_name"> <%=itemlist[j].productname%></span>
+					     		</div>
+					     	</div> 
+					     </td> 
+					     <td id="product_singleprice" align="left"> ￥<%=itemlist[j].price%> </td>
+					     <td id="product_num" align="left"> <%=itemlist[j].number%> </td>
+                         <td id="product_price" align="left">￥ <%=itemlist[j].sumPrice%> </td>  
+					     <td id="product_fun" align="left">  
+							<a href="#">删除</a><br/>
+							<a href="javascript:purcharse_good(<%=itemlist[j].cartid%>)">购买</a>
+						</td>
+					  </tr>
+					</tbody>
+				<%}%>
+			</table> 
+		<%}%> 
+	</script>
+	
+	<script src="../../js/buyer/shopCart.js"></script>
+  </body>
+</html>

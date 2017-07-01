@@ -1,0 +1,21 @@
+/**
+ * 
+ */
+window.onload = function(){
+	var queryParams = {
+			input:'2',
+			
+	}
+	
+	$.ajax({
+        url : "buyerManagerController/queryByName.do",
+        data: queryParams,
+        type : "post",
+        dataType : "json",
+        success : function(result) {
+             $("#tb").bootstrapTable({
+                 data: result
+             });
+        }
+    });
+}

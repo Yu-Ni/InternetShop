@@ -1,0 +1,21 @@
+package com.cqut.model.service;
+
+import java.util.List;
+
+
+import com.cqut.model.pojo.Commodity;
+
+public interface CommodityService {
+
+
+	//增加
+	public void insert(Commodity commodity);
+	//删除
+	public void delete(String productIds);
+	//修改
+	public void update(Commodity commodity);
+	//查询
+	public Commodity getCommodityById(String productId);
+	//根据条件查询列表
+	public List<Commodity> getCommodityByCondition(String condition);
+}

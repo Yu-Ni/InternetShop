@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>已买商品</title>
+	<meta charset="utf-8" />
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+     <link rel="stylesheet" type="text/css" href="../../css/buyer/Allorder.css" >
+     <script type="text/javascript" src="../../js/frame/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/frame/baiduTemplate.js"></script>
+     
+    
+    <script type="text/javascript" ></script>   
+  </head> 
+  <body  >
+    
+    <div class="page"> 
+	     <header class = "main_header">
+	          <div class="IS_logo">
+	          	 <a href="personCenter.html">我的订单</a> 
+	          </div>
+	          <div class="header_nav"> 
+	          	<ul >
+	          	  <li><a href="BuyerIndex.jsp">首页</a></li>
+	          	  <li><a href="Allorder.html">我的订单</a></li>
+	          	  <li><a href="shopCart.html">购物车</a></li>
+	          		
+	          	</ul>
+	          </div>
+	          
+	     </header>
+	     <div class = "main_content">
+	     
+			      
+			     <div class="order_content">
+			     	<div class="search_order">
+			     		<form>
+			     			<input type="text"  id="searchinfo" name="searchinfo"/>
+			     			<input type="submit" value="搜索"/>
+			     		</form>
+			     		
+			     	</div>
+			     	
+			     		<table class="order_table_header" >
+			     			<tbody class="header_tbody">
+			     				<tr id="tr1">
+			     					<th id="th1">订单名称</th>
+			     					<th id="th2">单价</th>
+			     					<th id="th3">数量</th>
+			     					<th id="th4">总价</th>
+			     					<th id="th5">商品操作</th>
+
+			     				</tr>
+			     			</tbody>
+			     		</table>
+			     		
+			     		 
+				     	  <div id="order_table" class="order_table"  >
+				     	  
+				     	  </div>
+				     	  <script id="tpl" type="text/html">
+							<%for(var i =0;i<list.length;i++) {%>
+					     		<table class="order_table_content" style="border: solid; border-color: #8C8C8C;border-width:1px;">
+					     			<thead class="order_title" >
+					     				<tr >
+					     					<td id="td1" colspan="2">
+					     						<span id="order_time"><%=list[i].createtime%></span>
+					     						<span>订单号：</span>
+					     						<span id="order_id"><%=list[i].orderid%></span>
+					     					</td>
+					     					 
+					     					<td id="td2" >
+					     						<span>店铺：</span>
+					     						<span  id="order_shop"><%=list[i].shopname%></span>
+					     					</td>
+					     					<td id="td3" colspan="2" style="text-align: right;"><a href="#"><i id="delete"></i></a></td>
+					     				</tr>
+					     			</thead>
+					     			<tfoot>
+					     				
+					     			</tfoot>
+                                 <% var itemlist = list[i].details%>
+                                  <%for(var j =0;j<itemlist.length;j++) {%>
+
+					     			<tbody class="order_detail">
+					     				<tr>
+					     					<td id="product_name">
+					     						 <div class="product_container">
+					     						 	<div class="product_img">
+					     						 		<a href="Detailproduct.html?productId=<%=itemlist[j].productid%>">	
+					     						 			<img id="product_img" src="../../../upload/<%=itemlist[j].img%>" />
+					     						 		</a> 
+					     						 	</div>
+					     						 	<div class="product_info">
+		     						 			      <a href="Detailproduct.html?productId=<%=itemlist[j].productid%>"><span id="order_name"> <%=itemlist[j].productname%></span></a>
+
+					     						 	</div>
+					     						 	
+					     						 </div> 
+					     					</td> 
+					     					<td id="product_singleprice"><span class="pricespan"> <%=itemlist[j].productprice%></span> </td>
+					     					<td id="product_num"> <%=itemlist[j].number%> </td>
+                                            <td id="product_price"> <span class="pricespan"><%=itemlist[j].itemPrice%></span> </td>  
+					     					<td id="product_fun" >  <a href="#">删除订单</a><br/><a href="#">确认收货</a></button></td>
+					     				</tr>
+					     			</tbody>
+									<%}%>
+					     		</table> 
+									<%}%> 
+				      	</script>
+				      	
+			     </div>
+            			    
+	     </div>
+	     
+	     <div class ="main_footer">
+	     
+	     </div>
+     </div>
+	<script src="../../js/buyer/Allorder.js"></script>
+  </body>
+</html>

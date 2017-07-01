@@ -1,0 +1,7 @@
+package com.cqut.model.service;
+
+import com.cqut.model.pojo.Commodity;
+
+public interface BuyerService {
+	 public Commodity selectByTypeId(String typename);
+}

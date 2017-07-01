@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.UserDao">
+	
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.UserInfo" id="t_user">
+		<id property="userid" column="userid"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="realname" column="realname"/>
+	</resultMap>
+	
+	<!-- 登录 -->
+	<select id="login" resultMap="t_user" parameterType="com.cqut.model.pojo.UserInfo">
+		select * from t_user where username = #{0} and password = #{1}
+	</select>
+	
+	<!-- 注册 -->
+	<insert id="register">
+		insert into t_user(userid,username,password,realname) values(#{userid},#{username},#{password},#{realname})
+	</insert>
+	
+	<!-- 查询 -->
+	<select id="query" resultMap="t_user" parameterType="String">
+		select * from t_user where realname like #{input}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		delete from t_user where userid = #{userid}
+	</delete>
+	
+	<!-- 根据id获取个人信息 -->
+	<select id="queryById" resultMap="t_user" parameterType="String">
+		select * from t_user where userid = #{userid}
+	</select>
+	
+	<!-- 编辑 -->
+	<update id="update">
+		update t_user set username=#{username},password=#{password},realname=#{realname} where userid=#{userid}
+	</update>
+	
+	<!-- 根据id获取个人信息 -->
+	<select id="queryByName" resultMap="t_user" parameterType="String">
+		select * from t_user where realname like #{input}
+	</select>
+</mapper>

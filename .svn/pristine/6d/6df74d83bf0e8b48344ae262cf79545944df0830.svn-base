@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+window.onload = function(){
+	var queryParams = {
+			input:'1'
+	}
+	
+	$.ajax({
+        url : "adminManageController/queryByName.do",
+        data: queryParams,
+        type : "post",
+        dataType : "json",
+        success : function(result) {
+             $("#tb").bootstrapTable({
+                 data: result
+             });
+        }
+    });
+}

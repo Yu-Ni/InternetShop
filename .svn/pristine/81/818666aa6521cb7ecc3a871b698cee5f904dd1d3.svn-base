@@ -1,0 +1,83 @@
+package com.cqut.model.pojo;
+
+public class Notice {
+	public Notice(String title, String username, String theme, String reply,
+			String noticetime) {
+		super();
+		this.title = title;
+		this.username = username;
+		this.theme = theme;
+		this.reply = reply;
+		this.noticetime = noticetime;
+	}
+	private String noticeid;
+	private String title;
+	private String username;
+	private String theme;
+	private String reply;
+	private String noticetime;	
+	
+	@Override
+	public String toString() {
+		return "Notice [noticeid=" + noticeid + ", title=" + title
+				+ ", username=" + username + ", theme=" + theme + ", reply="
+				+ reply + ", noticetime=" + noticetime + "]";
+	}
+
+	
+	public Notice() {
+		super();
+	}
+
+	
+	public Notice(String noticeid, String title, String username, String theme,
+			String reply, String noticetime) {
+		super();
+		this.noticeid = noticeid;
+		this.title = title;
+		this.username = username;
+		this.theme = theme;
+		this.reply = reply;
+		this.noticetime = noticetime;
+	}
+
+	
+	public String getNoticeid() {
+		return noticeid;
+	}
+	public void setNoticeid(String noticeid) {
+		this.noticeid = noticeid;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getTheme() {
+		return theme;
+	}
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+	public String getNoticetime() {
+		return noticetime;
+	}
+	public void setNoticetime(String noticetime) {
+		this.noticetime = noticetime;
+	}
+
+
+}

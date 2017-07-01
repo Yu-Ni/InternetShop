@@ -1,0 +1,202 @@
+@CHARSET "UTF-8";
+body{
+	margin:0;
+	padding:0;
+}
+
+#mainDiv{
+	margin:0 13.5%;
+}
+
+.titleDiv{
+	height:79px;
+	width:100%;
+}
+
+.searchDiv{
+	margin-left:57.5%;
+	border:2px solid #FF4400;
+}
+
+
+.goodType{
+	background-color:#F5F5F5;
+	color:black;
+}
+
+.searchContent{
+	width:300px;
+	margin-left:-10px;
+}
+
+.searchBtn{
+	width:58px;
+	background-color:#FF4400;
+	color:white;
+	margin-left:-10px;
+}
+.searchBtn,
+.searchContent,
+.goodType{
+	height:40px;
+}
+
+.detailDiv{
+	height:50px;
+	border-bottom:1px solid #B0B0B0;
+}
+.detail_nav{
+	display:flex;
+	align-items:Center;
+	margin-left:83%;
+}
+
+.titleDiv,
+.detailDiv{
+	display:flex;
+	align-items:Center;
+}
+
+.calcul_btn a{
+	display:black;
+	width:auto;
+	height:auto;
+	padding:6px;
+}
+
+.calcul_btn a{
+	text-decoration:none;
+	color:white;
+	background-color:#FF4400;
+}
+
+.calcul_btn a:hover,
+.calcul_btn a:active{
+	color:white;
+	text-decoration:none;
+	background-color:#F22D00;
+}
+
+.sum_money{
+	color:#FF4400;
+	margin-right:10px;
+	margin-left:10px;
+}
+
+.detail_list{
+	height:auto;
+	margin-bottom:8%;
+}
+
+.cart_table_header{
+	width:100%;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.cart_table_content{
+	margin-top:20px;
+	width:100%;
+}
+
+.cart_title>tr>td{
+	margin-top:10px;
+	margin-bottom:10px;
+	height:50px;
+}
+
+.cart_title>tr>td,
+.cart_detail>tr>td{
+	padding-left:20px;
+}
+
+.cart_detail{
+	border:1px solid #8C8C8C;
+	background-color:#FCFCFC;
+}
+
+.cart_detail>tr>td{
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+.product_img,
+.product_info{
+	float:left;
+}
+
+.product_container{
+	display:flex;
+	align-items:Center;
+}
+
+#product_price{
+	color:red;
+	font-weight:bold;
+}
+
+.productInfo{
+	width:50%;
+}
+
+#product_name{
+	width:51%;
+}
+
+#product_singleprice{
+	width:12%;
+}
+
+#product_num{
+	width:9%;
+}
+
+.footer{
+	width:73%;
+	height:50px;
+	line-height:50px;
+	background-color:#E5E5E5;
+	position:fixed;
+	bottom:0;
+}
+
+.footer>div{
+	text-align:center;
+	float:right;
+}
+
+.calcul_btn2>input{
+	height:100%;
+	width:150px;
+	background-color:#FF4400;
+	color:white;
+}
+
+.check_amount2,
+.sum_money2{
+	font-weight:bold;
+	color:#FF4400;
+	font-size:20px;
+}
+
+.sum_money2{
+	margin-left:20px;
+	margin-right:20px;
+}
+
+.product_img>a>img{ 
+	cursor: pointer;    
+    transition: all 0.6s; 
+}
+
+.product_img>a>img:hover{
+    transform: scale(2.4); 
+}
+
+.bootstrap-dialog.type-primary .modal-header{
+	background-color:#FF4400 !important;
+}
+
+.modal-dialog {
+    margin: 248px auto !important;
+}

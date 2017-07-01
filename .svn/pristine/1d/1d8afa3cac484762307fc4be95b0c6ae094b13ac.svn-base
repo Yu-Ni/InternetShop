@@ -1,0 +1,17 @@
+package com.cqut.model.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cqut.model.dao.BuyerDao;
+import com.cqut.model.pojo.Commodity;
+import com.cqut.model.service.BuyerService;
+@Service
+public class BuyerServiceImpl implements BuyerService{
+	@Autowired
+	private BuyerDao dao;
+	@Override
+	public Commodity selectByTypeId(String typename) {
+		return dao.selectByTypeId(typename);
+	}
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqut.model.dao.SellerDao">
+
+	<!-- 结果集映射 -->
+	<resultMap type="com.cqut.model.pojo.Seller" id="t_seller">
+		<id property="sellerId" column="sellerId" />
+		<result property="userName" column="userName" />
+		<result property="realName" column="realName" />
+		<result property="password" column="password" />
+		<result property="bankNumber" column="bankNumber" />
+		<result property="phoneNumber" column="phoneNumber" />
+		<result property="address" column="address" />
+		<result property="id_card" column="id_card" />
+	</resultMap>
+
+
+	<!-- 根据id获取个人信息 -->
+	<select id="agetListaa" resultMap="t_seller" parameterType="String">
+		select * from t_seller where realname like #{input}
+	</select>
+		<insert id="insert"  parameterType="com.cqut.model.pojo.Seller">
+		insert into t_seller(sellerId,userName,realName,password,bankNumber,phoneNumber,address,id_card) values(#{sellerId},#{userName},#{realName},#{password},#{bankNumber},#{phoneNumber},#{address},#{id_card})
+	</insert>
+		<!-- 编辑 -->
+	<update id="update">
+		update t_seller set userName=#{userName},realName=#{realName},password=#{password},bankNumber=#{bankNumber},phoneNumber=#{phoneNumber},address=#{address},id_card=#{id_card} where sellerId=#{sellerId} 
+	</update> 
+		<!-- 查询 -->
+	<select id="getSellerByCondition" resultMap="t_seller" parameterType="String">
+		select * from t_seller where username like #{input}
+	</select>
+		<!-- 删除 -->
+	<delete id="delete">
+		delete from t_seller where sellerId in #{sellerIds}
+	</delete>
+	
+</mapper>

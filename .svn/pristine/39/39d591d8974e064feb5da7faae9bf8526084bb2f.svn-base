@@ -1,0 +1,107 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>My JSP 'AllorderIndex.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	
+	-->
+<link rel="stylesheet" type="text/css"
+	href="module/css/buyer/Allorder.css">
+</head>
+<body>
+<div class="mi-hea">
+  
+<span class="kkdeng">欢迎您：xxx
+</span>
+</div>
+	<header class="mt-header">
+	<div class="mt-logo">
+		<span title="我的个人中心" href="" class="mt-tblogo" data-spm="d1000351">
+			我的个人中心 </span>
+		<nav class="mt-nav">
+
+		<ul id="J_MtMainNav">
+			<li><a>淘宝首页</a> <i class="mt-arrow"></i></li>
+			<li class="J_MtNavSubTrigger"><a class="mt-nav-parent">商品分类</a>
+			<li class=""><a class="mt-nav-parent">购物车</a> <i
+				class="mt-arrow"></i></li>
+			<li><a>已买到的宝贝</a> <i class="mt-arrow"></i></li>
+		</ul>
+		<div class="search" id="J_Search">
+			<form target="_blank" action="" name="search" id="J_TSearchForm"
+				class="formserch">
+				<div class="search-combobox" id="ks-component173">
+					<input id="q" name="q" accesskey="s" class="search-combobox-input"
+						aria-label="请输入搜索文字" />
+					<button class="btn-search" type="submit">搜 索</button>
+				</div>
+			</form>
+		</div>
+		</nav>
+	</div>
+	</header>
+	<content class="col-main">
+	<div class="maint">
+	<ul id="J_MtMainNav">
+			<li><a>所有订单</a> <i class="mt-arrow"></i></li>
+			<li class="J_MtNavSubTrigger"><a class="mt-nav-parent">待付款</a>
+			<li class=""><a class="mt-nav-parent">待发货</a> <i
+				class="mt-arrow"></i></li>
+			<li><a>待收货</a> <i class="mt-arrow"></i></li>
+		</ul>
+	</div>
+	  <div class="tableW">
+				<table >
+				<tr style="background-color: rgb(234,248,255)" height="40px">
+				<td  width="24%">
+				时间
+				</td>
+				<td width="30%">
+				订单号
+				</td>
+				<td  width="110%" colspan="4">
+				卖家名
+				</td>
+				</tr>
+				<tr height="70px">
+				<td>
+				图片
+				</td>
+				<td>
+				介绍
+				</td>
+				<td width="15%">
+				价格
+				</td>
+				<td width="20%">
+				订单状态
+				</td>
+				<td>
+				收货状态
+				</td>
+				<td>
+				</td>
+				</tr>
+				</table>
+				</div>
+	</content>
+	
+	
+</body>
+</html>

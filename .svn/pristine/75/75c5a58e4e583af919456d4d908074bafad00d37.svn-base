@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+.bootstrap-table .table thead>tr>th{
+background-color: rgb(43,57,70) !important;
+color:#fff;
+}
+#tb tbody>tr:hover {
+	background-color: silver !important;
+}
+#tb {
+/* 	background: url('/InternetShop/module/img/admin/tablebackground.jpg');
+ */	background-repeat: no-repeat;
+	background-size: 100%
+}
+.btn{
+	background-color:#16B38D;
+	color:#ffffff;
+	width:100px;
+	margin-top:5px;
+	margin-left:3px;
+}
+.txt{
+		margin-left:330px;
+		width:200px;
+		height:35px;
+		margin-top:10px;
+}

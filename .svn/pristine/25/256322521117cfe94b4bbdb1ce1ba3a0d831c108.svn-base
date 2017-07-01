@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+.input-group{
+	margin:10px !important;
+	width:340px !important;
+}
+
+.bootstrap-dialog.type-primary .modal-header{
+	background-color:#F98A53;
+}
+
+.registerBtn{
+	width:339px;
+	height:40px;
+	margin-left:10px;
+	background-color:#F98A53;
+	color:#ffffff;
+	-webkit-border-top-left-radius:0.3em;
+    -webkit-border-top-right-radius:0.3em;
+    -webkit-border-bottom-left-radius:0.3em;
+    -webkit-border-bottom-right-radius:0.3em;
+}
+
+.modal-dialog {
+    margin: 248px auto !important;
+}

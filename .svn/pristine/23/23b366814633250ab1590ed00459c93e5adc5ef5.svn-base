@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+window.onload = function(){
+	var queryParams = {
+			input:'王'
+	}
+	
+	$.ajax({
+        url : "userController/queryByName.do",
+        data: queryParams,
+        type : "post",
+        dataType : "json",
+        success : function(result) {
+             $("#table").bootstrapTable({
+                 data: result
+             });
+        }
+    });
+}

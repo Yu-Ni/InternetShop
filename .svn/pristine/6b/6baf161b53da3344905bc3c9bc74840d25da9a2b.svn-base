@@ -1,0 +1,87 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'Individual.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+<link type="text/css" rel="stylesheet"
+	href="./module/css/seller/register.css" />
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="./module/css/frame/bootstrap-dialog.min.css" />
+
+<script src="./module/js/frame/jquery.js"></script>
+<script src="./module/js/frame/jquery.min.js"></script>
+<script src="./module/js/frame/bootstrap.js"></script>
+<script src="./module/js/frame/bootstrap.min.js"></script>
+  </head>
+  
+  <body>
+ 	<div class="col-sm-9 col-sm-offset-3 col-md-10"  id="IndividualForm" style="margin-top: 200px;width: 530px;padding-top: 200px;" >
+		<form action="" method="get">
+			<p>
+				卖家编号: <input type="text" class="form-control" name="sellerId" id="sellerId" readonly="readonly" style="width: 326px;"/>
+			</p>
+			<p>
+				用户名: <input type="text" class="form-control" name="username" id="username" readonly="readonly" style="width: 326px;"/>
+			</p>
+			<p>
+				真实姓名: <input type="text" class="form-control" name="realname" id="realname" readonly="readonly" style="width: 326px;"/>
+			</p>
+			<p>
+				银行卡号: <input type="text" class="form-control" name="banknumber" id="banknumber" readonly="readonly" style="width: 326px;"/>
+			</p>
+			<p>
+				电话号码: <input type="text" class="form-control" name="phonenumber" id="phonenumber" readonly="readonly" style="width: 326px;"/>
+			</p>
+			<p>
+				地址: <input type="text" class="form-control" name="address" id="address" readonly="readonly" style="width: 326px;"/>
+			</p>
+			<p>
+				真实姓名: <input type="text" class="form-control" name="id_card" id="id_card" readonly="readonly" style="width: 326px;"/>
+			</p>
+			<input type="submit" value="修改个人资料" />
+		</form>
+	</div>
+
+  </body>
+<script type="text/javascript">
+$(function(){
+$.ajax({
+		data:'',
+		url:'IndividualController/getIndInfo.do',
+		success:function(result){
+			var obj=JSON.parse(result);
+			$("#sellerId").val(obj.sellerId);
+			$("#username").val(obj.username);
+			$("#realname").val(obj.realname);
+			$("#banknumber").val(obj.banknumber);
+			$("#phonenumber").val(obj.phonenumber);
+			$("#address").val(obj.address);
+			$("#id_card").val(obj.id_card);
+			/* var form = document.getElementById("IndividualForm");
+			form.style.display="block"; */
+		}
+	});
+});
+</script>
+</html>

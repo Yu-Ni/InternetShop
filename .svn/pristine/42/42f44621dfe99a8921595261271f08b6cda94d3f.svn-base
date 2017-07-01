@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
+}
+
+#content{
+	margin: 0 20px;
+    width: 96%;
+    line-height:100%;
+}
+
+.titleInfo{
+	float:left;
+	margin-top: 26px;
+}
+
+.userInfo{
+	float:right;
+	margin-top: 12px;
+	font-size:15px;
+}
+
+.titleInfo div{
+	float:left;
+	margin-right:20px;
+}
+
+.titleInfo div img{
+	margin-top:-6px;
+}
+
+.userInfo div img{
+	position:relative;
+	top:6px;
+}
+
+.titleInfo span{
+	color:#16B398;
+}
+
+.userInfo span{
+	margin-right:5px;
+}
+
+.userInfo a{
+	text-decoration:none;
+	color:black;
+}

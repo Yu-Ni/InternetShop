@@ -1,0 +1,232 @@
+*{
+	margin:0px;
+	padding:0px;
+	
+}
+ 
+
+.nav_title{
+	height: 25px;
+ }
+.left_info ul li{ 
+	font-size:0.6em;
+	 float:left;
+	 list-style:none;  
+     margin:5px;
+}
+.right_info{
+	float: right;
+}
+.right_info ul li{
+	 float:left;
+	 list-style:none;  
+     margin:5px;
+}
+.main_header{
+	height: 36px;
+	background: #8EE5EE;
+	padding: 12px;
+}
+.IS_logo{ 
+	width: 20%;
+    
+	display: inline-block;
+	vertical-align: middle;
+	font-size:x-large;
+	
+	
+}
+.IS_logo a{
+	margin-left: 40px; 
+	text-decoration:none;
+	color:white;
+}
+.header_nav{
+	float: right;
+	width:80%;
+}
+.header_nav ul li{
+	 float:left;
+	 list-style:none;  
+     margin:8px;
+} 
+.header_nav ul li a{ 
+	text-decoration:none;
+	color:white;
+} 
+.header_nav ul li a:hover{  
+	color:#D43F3A;
+}
+ 
+.main_content{
+	margin: 5px 100px 0px 100px;
+}
+.order_tabs{
+	height: 50px;
+}
+
+.all_order {
+	padding: 10px;
+	float: left;
+ }
+ .all_order a {
+	 color: #8EE5EE;
+	 text-decoration:none;
+
+ }
+.wait_order{
+	padding: 10px;
+	float: left;
+
+}
+.wait_order a{
+	 color: #8EE5EE;
+	 text-decoration: none;
+}
+.all_order a:hover{  
+	 color:#D43F3A;
+} 
+.wait_order a:hover{
+	 color: #D43F3A; 
+}
+.hor_line{
+	width: 100%;
+	height: 1px;
+	background:#EEE8AA;
+}
+.order_table{ 
+ 	  
+}
+.order_table_header{
+	width: 100%;
+	background: #f5f5f5;
+	margin: 10px 0 10px 0;
+}
+.header_tbody{
+		border-color: inherit;
+}
+.header_tbody th{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 0.8em;
+}
+#th1{
+	 width: 30%;
+}
+#th2{
+	 width: 20%;
+}
+#th3{
+	 width: 20%;
+}
+#th4{
+	 width: 10%;
+}
+#th5{
+	 width: 20%;
+}
+.order_table{
+ 	width: 100%;
+	padding: 0px 0 10px 0;
+}
+.order_table_content{
+	margin-top: 10px;
+ 	width: 100%;
+}
+.order_title{
+	background:#f5f5f5 ;
+}
+#td1{
+	
+	width: 30%;
+ }
+ #order_time{
+ 
+ margin-left:20px;
+ }
+#td2{
+    width: 30%; 
+}
+#td3{
+   width: 20%;
+
+}
+.order_title td{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 0.8em;
+}
+.order_detail td{ 
+	vertical-align:middle;
+	 text-align:center;
+}
+.product_container{
+	height: 100%;
+	margin-left: 10px; 
+}
+ 
+.order_detail td {
+	height: 60px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+ 
+.product_img{ 
+	float: left;
+}
+.product_info{ 
+	 
+	float: left;
+	margin-top:20px;
+	margin-left: 40px
+}
+#product_img{
+	
+	height: 70px;
+	width: 70px;
+ 	padding: 5px;
+}
+#order_name{
+	 font-size:1.0em;
+	  vertical-align: middle;
+	 
+}
+#product_name{
+	width: 30%;
+}
+#product_price{
+	width: 20%;
+}
+#product_singleprice{
+	width: 20%;
+}
+#product_num{
+
+	width: 10%;
+}
+#product_fun{
+
+	 width: 20%;
+}
+#delete{
+	 height:17px;
+	 width:17px;
+	 margin-right:17px;
+	 overflow:hidden;
+	 vertical-align:middle;
+	 font-size:0px;
+	 display:inline-block;
+	 visibility:visible;
+	 background:url(//img.alicdn.com/tps/i1/TB1heyGFVXXXXXpXXXXR3Ey7pXX-550-260.png) no-repeat -239px -176px;
+	 
+}
+#product_fun a{
+	color:#333;
+	font-size:0.6em;
+	text-decoration: none;
+	
+}
+#product_fun a:hover{
+	color:#D43F3A;
+	
+}

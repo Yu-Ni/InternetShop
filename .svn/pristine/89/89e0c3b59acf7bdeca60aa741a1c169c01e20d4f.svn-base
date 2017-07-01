@@ -1,0 +1,162 @@
+function queryParams(pageRequest){
+	pageRequest.condition=$("#searchT").val();
+	return pageRequest;
+}
+	$(function () {
+	loaddata();
+	});
+$("#search").click(function(){
+	
+	$('#tb').bootstrapTable('refresh', queryParams);
+});
+$(function(){
+	loaddata();
+});
+function loaddata()
+{
+	$('#tb').bootstrapTable({
+		 //定义表格的高度
+		height: 450,
+		striped: true,// 隔行变色效果
+		pagination: true,//在表格底部显示分页条
+		pageSize: 10,//页面数据条数
+		pageNumber:1,//首页页码
+		pageList: [10, 15, 20, 30,50,100],//设置可供选择的页面数据条数
+		//clickToSelect:true,//设置true 将在点击行时，自动选择rediobox 和 checkbox
+		cache: false,//禁用 AJAX 数据缓存
+		sortName:'ID',//定义排序列
+		sortOrder:'asc',//定义排序方式		
+		sidePagination:'client',//设置在哪里进行分页
+		contentType:'application/json',//发送到服务器的数据编码类型SS
+		dataType:'json',//服务器返回的数据类型
+    	queryParams:queryParams,//请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数
+    	url:'evaluationManagerController/getEvaluation.do',//服务器数据的加载地址8
+		selectItemName:'',//radio or checkbox 的字段名
+		singleSelect:true,
+		columns:[{
+			radio:true,
+			width:'2'//宽度
+		},{
+			field:'evaluationid',//返回值名称
+			title:'评价编号',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'20',//宽度
+//			visible:false
+		},{
+			field:'orderid',//返回值名称
+			title:'订单编号',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'20',//宽度
+			//  visible:false
+		},{
+			field:'time',//返回值名称
+			title:'时间',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'5',//宽度
+			//visible:false
+		},{
+			field:'content',//返回值名称
+			title:'评论内容',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'2'//宽度
+		},{
+			field:'buyerid',//返回值名称
+			title:'买家ID',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'20'//宽度
+		}]//列配置项,详情请查看 列参数 表格
+		/*事件*/
+	});
+}
+
+/* 弹出修改弹框方法 */
+function editModal(){
+	var data = $('#tb').bootstrapTable('getSelections');
+	
+	if(data.length==0 || data.length>1){
+		alert("请选中一条数据");
+		return;
+	}
+	$('#editevaluationid').val(data[0].evaluationid);
+	$('#editorderid').val(data[0].orderid);
+	$('#edittime').val(data[0].time);
+	$('#editbuyerid').val(data[0].buyerid);
+	$('#editcontent').val(data[0].content);
+	$('#editModal').modal('show');
+}
+
+/* 修改方法 */
+function edit(){
+	var name = $('#editevaluationid').val(); 
+	if (!name && typeof(name)!="undefined" && name=='') 
+	{ 
+		alert("选择不能为空！"); 
+	}else {
+		var data = $('#tb').bootstrapTable('getSelections');
+		var ids =  data[0].evaluationid;
+		var parame = {};
+		parame.evaluationid = ids;
+		parame.orderid = $('#editorderid').val();
+		parame.time = $('#edittime').val();
+		parame.content =  $('#editcontent').val() ;
+		parame.buyerid = $('#editbuyerid').val();
+		$.ajax({
+		  url:'evaluationManagerController/updateEvaluation.do',
+		  data:parame,
+		  contentType:"text/html;charset=utf-8",
+		  success:function(o){
+			  if(o<=0){
+				  alert("修改失败");
+			  }
+			  $('#editModal').modal('hide');
+			      refresh();
+		  }
+		});
+	}
+}
+	
+
+
+/* 刷新方法 */
+function refresh(){
+	$('#tb').bootstrapTable('refresh', null);
+}
+/* 删除方法 */
+function delData(){
+	var data = $('#tb').bootstrapTable('getSelections');
+	if (data.length == 0) {
+		alert("请至少选中一条数据");
+		return;
+	}
+	var ids = "";
+	for (var i = 0; i < data.length; i++) {
+		ids += data[i].evaluationid + ",";
+	}
+	var ajaxParameter = {
+			evaluationid : ids.substring(0, (ids.length - 1))
+	};
+	var r=confirm("确认删除");
+	if(r==true){
+	$.ajax({
+		url : 'evaluationManagerController/delEvaluation.do',
+		data : ajaxParameter,
+		success : function(o) {
+			if (o <= 0) {
+				alert("删除失败");
+			}
+			refresh();
+		}
+	});
+	alert("删除成功");
+	}
+	else
+		{
+		alert("不用删除了");
+		}
+}
+

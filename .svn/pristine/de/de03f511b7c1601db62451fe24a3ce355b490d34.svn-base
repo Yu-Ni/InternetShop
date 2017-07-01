@@ -1,0 +1,10 @@
+package com.cqut.model.dao;
+
+import org.springframework.stereotype.Repository;
+
+import com.cqut.model.pojo.Commodity;
+
+@Repository
+public interface BuyerDao {
+  public Commodity selectByTypeId(String typename);
+}

@@ -1,0 +1,111 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>买家首页</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+<link type="text/css" rel="stylesheet"
+	href="module/css/frame/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="module/css/buyer/Index.css" />
+<script type="text/javascript" src="module/js/frame/jquery.min.js"></script>
+<script type="text/javascript" src="module/js/frame/bootstrap.min.js"></script>
+<script type="text/javascript" src="module/js/buyer/BuyerIndex.js"></script>
+</head>
+
+<body>
+	<div id="mapper">
+		<div id="header">
+			<ul id="Navigation">
+				<li><a href="">你好！请登录</a></li>
+				<li><a href="">立即注册</a></li>
+				<li><a href="">我的SHOP</a></li>
+				<li><a href="">购物车</a></li>
+				<li><a href="">商品分类</a></li>
+				<li><a href="">卖家中心</a></li>
+			</ul>
+		</div>
+		<div id="SearchHeader">
+			<img src="">
+			<div id="search" class="input-group col-md-6">
+				<input type="text" class="form-control" placeholder="你想要什么"/ >
+				<span class="input-group-btn">
+					<button class="btn btn-search">查找</button>
+				</span>
+			</div>
+		</div>
+		<div id="nav">
+			<ul id="SecondNav">
+				<li><a href="module/jsp/buyer/Index.jsp">首页</a></li>
+				<li id="clothes">女装男装</li>
+				<li>鞋类箱包</li>
+				<li>汇吃美食</li>
+				<li>家居家纺</li>
+				<li>更多>></li>
+			</ul>
+		</div>
+		<div id="myCarousel" class="carousel slide">
+			<!-- 轮播（Carousel）指标 -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<!-- 轮播（Carousel）项目 -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="module/img/buyer/1.jpg" alt="First slide">
+				</div>
+				<div class="item">
+					<img src="module/img/buyer/2.jpg" alt="Second slide">
+				</div>
+				<div class="item">
+					<img src="module/img/buyer/3.jpg" alt="Third slide">
+				</div>
+			</div>
+			<!-- 轮播（Carousel）导航 -->
+			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			<a class="carousel-control right" href="#myCarousel"
+				data-slide="next">&rsaquo;</a>
+		</div>
+		<div id="clotheShow" class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">男装女装</h3>
+			</div>
+			<div class="panel-body">This is a Basic panel</div>
+			 <div class="panel-footer"><span style="float:right;margin-right:50px;"><a>查看更多>></a></span></div>
+		</div>
+		<div id="bagShow" class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">鞋类箱包</h3>
+			</div>
+			<div class="panel-body">This is a Basic panel</div>
+		</div>
+		<div id="foodShow" class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">汇吃美食</h3>
+			</div>
+			<div class="panel-body">This is a Basic panel</div>
+		</div>
+		
+		<div id="footer">
+		
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"  
+       xmlns:context="http://www.springframework.org/schema/context" 
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+       xmlns:util="http://www.springframework.org/schema/util"     
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+     	  http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       	  http://www.springframework.org/schema/context 
+       	  http://www.springframework.org/schema/context/spring-context-3.2.xsd
+      	  http://www.springframework.org/schema/aop
+	      http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	      http://www.springframework.org/schema/tx
+	      http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		  http://www.springframework.org/schema/jdbc 
+		  http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd 
+		  http://www.springframework.org/schema/mvc      
+          http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd  
+          http://www.springframework.org/schema/util 
+          http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+		  >
+
+	<!-- 用注解方式注入bean -->
+	<context:annotation-config />
+	<!-- 扫描对应包下的控制器 -->
+	<context:component-scan base-package="com.cqut.*"></context:component-scan>
+	
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射,解决@ResponseBody乱码问题, 需要在
+	annotation-driven之前,否则乱码问题同样无法解决 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html;charset=utf-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<mvc:annotation-driven/>
+  	
+  	<!-- 指定数据源，解析数据库配置文件，并设置数据源的属性 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+ 		<property name="url" value="jdbc:mysql://localhost:3306/test?Unicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"/>
+		 <property name="username" value="root" />
+		<property name="password" value="root" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="1" />
+	</bean>
+ 	
+   <!-- 此处会自动调用 MapperScannerConfigurer -->
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath:com/cqut/mapper/*.xml" />  
+        <property name="configLocation" value="classpath:mybatis-configuration.xml" />
+    </bean>
+    
+   
+    <!--  扫描 xml配置文件及Dao接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--basePackage指定要扫描的包，在此包之下的映射器都会被 搜索到。可指定多个包，包与包之间用逗号或分号分隔com.abc.mapper -->
+		<property name="basePackage" value="com.cqut.model.dao" />
+	</bean>
+
+    <!-- 开启事务注解驱动 -->  
+    <tx:annotation-driven />  
+    
+    <!-- 事务管理器 -->  
+    <bean id="transactionManager"   class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource" />  
+    </bean>
+    
+    <!-- spring mvc返回JSON   -->   
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >    
+	    <property name="messageConverters">    
+		    <list>  
+		         <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />  
+		    </list>   
+	    </property>    
+	</bean>   
+    
+</beans>

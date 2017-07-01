@@ -1,0 +1,216 @@
+$(function () {
+	$('#table').bootstrapTable({
+		 //定义表格的高度
+		height: 450,
+		striped: true,// 隔行变色效果
+		pagination: true,//在表格底部显示分页条
+		pageSize: 10,//页面数据条数
+		pageNumber:1,//首页页码
+		pageList: [10, 15, 20, 30,50,100],//设置可供选择的页面数据条数
+		clickToSelect:true,//设置true 将在点击行时，自动选择rediobox 和 checkbox
+		cache: false,//禁用 AJAX 数据缓存
+		sortName:'ID',//定义排序列
+		sortOrder:'asc',//定义排序方式
+		url:'commodityManagerController/getCommodityList.do',//服务器数据的加载地址
+		sidePagination:'client',//设置在哪里进行分页
+		contentType:'application/json',//发送到服务器的数据编码类型
+		dataType:'json',//服务器返回的数据类型
+//		queryParams:'',//请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数
+		selectItemName:'',//radio or checkbox 的字段名
+		columns:[{
+			checkbox:true,
+			width:'5'//宽度
+		},{
+			field:'productId',//返回值名称
+			title:'商品编号',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'10',//宽度
+//			visible:false
+		},{
+			field:'typeId',//返回值名称
+			title:'类型id',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'10',//宽度
+            visible:false
+		},{
+			field:'shopId',//返回值名称
+			title:'店铺号',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'10',//宽度
+			visible:false
+		},{
+			field:'productName',//返回值名称
+			title:'商品名',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'10'//宽度
+		},{
+			field:'productMargin',//返回值名称
+			title:'库存余量',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'10'//宽度
+		},{
+			field:'price',//返回值名称
+			title:'价格',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'10'//宽度
+		},{
+			field:'remark',//返回值名称
+			title:'备注',//列名
+			align:'center',//水平居中显示
+			valign:'middle',//垂直居中显示
+			width:'10'//宽度
+		}]//列配置项,详情请查看 列参数 表格
+		/*事件*/
+	});
+});
+
+/* 刷新方法 */
+function refresh(){
+	$('#table').bootstrapTable('refresh', null);
+}
+
+
+/* 删除方法 */
+function delData(){
+	var data = $('#table').bootstrapTable('getSelections');
+	
+	if(data.length==0){
+		alert("请至少选中一条数据");
+		return;
+	}
+	
+	var ids = "";
+	for(var i=0; i<data.length; i++){
+		ids += data[i].productId + ",";
+	}
+	
+	var ajaxParameter = {
+			productIds:ids.substring(0, (ids.length-1))
+	};
+	
+	$.ajax({
+	  url:'commodityManagerController/delCommodity.do',
+	  data:ajaxParameter,
+	  success:function(o){
+		  if(o<=0){
+			  alert("删除失败");
+		  }
+		  refresh();
+	  }
+	});
+}
+
+function addModal(){ 
+	$('#addModal').modal('show');
+}
+/* 新增方法 */
+function add(){ 
+	var name = $('#productname').val(); 
+	if (!name && typeof(name)!="undefined" && name=='') 
+	{ 
+		alert("商品名不能为空！"); 
+	}else {
+		var parame = {};
+		parame.productName = $('#productname').val();
+		parame.typeId = $('#typeid').val();
+		parame.price = $('#price').val();
+		parame.productMargin = $('#margin').val();
+		parame.img = $('#image').val();
+		parame.remark = $('#remark').val(); 
+		
+		$.ajax({
+		  url:'commodityManagerController/addCommodity.do',
+		  data:parame,
+		  success:function(o){
+			  if(o<=0){
+				  alert("新增失败");
+			  }
+			  $('#addModal').modal('hide');
+			  refresh();
+		  }
+		});
+	}
+	
+}
+
+/* 弹出查看弹框方法 */
+function showModal(){ 
+	var data = $('#table').bootstrapTable('getSelections');
+	
+	if(data.length==0 || data.length>1){
+		alert("请选中一条数据");
+		return;
+	}
+	
+	$('#showproductname').val(data[0].productName);
+	$('#showtypeid').val(data[0].typeId);
+	$('#showmargin').val(data[0].productMargin);
+	$('#showprice').val(data[0].price);
+	$('#showremark').val(data[0].remark);
+
+	
+	$('#showModal').modal('show');
+}
+
+
+/* 弹出修改弹框方法 */
+function editModal(){
+	var data = $('#table').bootstrapTable('getSelections');
+	
+	if(data.length==0 || data.length>1){
+		alert("请选中一条数据");
+		return;
+	}
+	
+	//var ids =  data[0].ROLEID;
+	
+	
+	$('#editproductname').val(data[0].productName);
+	$('#edittypeid').val(data[0].typeId);
+	$('#editmargin').val(data[0].productMargin);
+	$('#editprice').val(data[0].price);
+	$('#editremark').val(data[0].remark);
+
+	
+	$('#editModal').modal('show');
+}
+
+
+/* 修改方法 */
+function edit(){
+	var name = $('#productname').val(); 
+	if (!name && typeof(name)!="undefined" && name=='') 
+	{ 
+		alert("商品不能为空！"); 
+	}else {
+		var data = $('#table').bootstrapTable('getSelections');
+		var ids =  data[0].productId;
+		var parame = {};
+		parame.productId = ids;
+		parame.productName = $('#editproductname').val();
+		parame.typeId = $('#edittypeid').val();
+		parame.price = $('#editprice').val();
+		parame.productMargin = $('#editmargin').val();
+		parame.img = $('#editimage').val();
+		parame.remark = $('#editremark').val();  
+		
+		$.ajax({
+		  url:'commodityManagerController/updateCommodity.do',
+		  data:parame,
+		  success:function(o){
+			  if(o<=0){
+				  alert("修改失败");
+			  }
+			  $('#editModal').modal('hide');
+			  refresh();
+		  }
+		});
+	}
+	
+}
